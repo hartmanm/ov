@@ -93,8 +93,8 @@ ddiv{}
 <div class="ll" id="linkinfo"></div>
 </div>
 <div class="grid-container1" id="main2">
-<div class="w"></div>
-<div class="a"></div>
+<div id="list"></div>
+<div id="add_node"></div>
 </div>
 </ddiv>
 <footer class="footer"></footer>
@@ -135,6 +135,23 @@ window.location.href = url;
 var signup_href = document.getElementById('login');
 signup_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_login(target)}, false);
 
+function execute_node_list(element)
+{
+var url = ov + "/node_list.html";
+window.location.href = url;
+}
+var list_href = document.getElementById('list');
+list_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_node_list(target)}, false);
+
+function execute_add_node(element)
+{
+var url = ov + "/add_node.html";
+window.location.href = url;
+}
+var list_href = document.getElementById('add_node');
+list_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_add_node(target)}, false);
+
+  
 </script>
 </body>
 </html>
