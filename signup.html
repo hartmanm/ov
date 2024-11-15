@@ -1,0 +1,215 @@
+<!--
+# Copyright (c) 2018 Michael Neill Hartman. All rights reserved.
+# mnh_license@proton.me
+# https://github.com/hartmanm
+# ov (previously openrig.net)
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>&nbsp Signup</title>
+</head>
+<body>
+<style>
+body{background-color:#746793; -webkit-app-region: drag;}
+code{padding: 4px 4px;font-size: 115%;color: #032166;background-color: #CBD3EE;border-radius: 2px;}
+.l{margin-left: 12px; margin-bottom: 25px;}
+.feedback{margin-bottom: 10px;}
+h1,h2{color: #2a2f2c;font-family: Lato, sans-serif;font-weight: 340;line-height: 1.125;}
+
+.content_heading{color: white; margin-left: 12px; margin-top: 0px; font-size: 150%; margin-block-end: 5px;}
+tos{padding: 2px 2px; font-family: arial, sans-serif; color: #032166; background-color: #CBD3EE; border-radius: 2px;}
+tos:hover,tos:active,tos:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
+home{padding: 2px 2px; font-family: arial, sans-serif; color: #032166; background-color: #CBD3EE; border-radius: 2px;}
+home:hover,home:active,home:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
+.dropdown{display: block; margin-top: 4px; padding: 8px; padding: 8px; padding: 0.5rem 0.75rem; border: 1px solid #cdcfcf; width: 20%; font-family: 'Open Sans', sans-serif; font-size: 16px; font-size: 16px; font-size: 1rem;}
+.dropdown:focus,.dropdown:active {border-color: #686a69; outline: 0;}
+pa{color:white;}
+.form{display: block;}
+.form_input_group{margin-top: 4px; margin-top: 0.25rem; padding: 0.5rem 1rem;}
+.form_label{display: block; color: white; font-family: Lato, sans-serif; font-size: 75%; line-height: 1.125;}
+.form_input{display: block; margin-top: 4px; padding: 0.5rem 0.75rem; border: 1px solid #cdcfcf; width: 80%; font-family: 'Open Sans', sans-serif; font-size: 16px; font-size: 16px; font-size: 1rem;}
+
+.form_button{margin-top: 15px; margin-bottom: 15px; margin-left: 25px; padding: 1px 1px; font-size: 115%; color: #12192A; background-color: #CFD0D1; border-radius: 2px;}
+.form_button:hover,.form_button:active,.form_button:focus{color: #CFD0D1; background-color: #12192A; cursor: pointer; outline: 0;}
+.lamdalink{color: white; margin-left: 80px; margin-bottom: 25px;}
+.content{max-width: 390px; margin-left: auto; margin-right: auto;}
+.section{margin-left: auto; margin-right: auto; width: 100%;}
+</style>
+<div class="section">
+<section class="content">
+<br>
+
+<br>
+<br>
+<!--
+<h1 class="content_heading">NO NEW ACCOUNTS CAN BE MADE AT THIS TIME WITHOUT DIRECT AUTHORIZATION</h1>
+<br>
+<h1 class="content_heading">EMAIL</h1>
+<br>
+<h1 class="content_heading">admin@openrig.net</h1>
+<br>
+<h1 class="content_heading">TO REQUEST AUTHORIZATION</h1>
+<br>
+<br>
+-->
+
+<div class="l"><tos id="terms_of_service">TERMS AND CONDITIONS</tos>&nbsp<tos id="privacy_policy">PRIVACY POLICY</tos></div>
+<h1 class="content_heading">Signup</h1>
+<form class="form">
+<div class="form_input_group">
+<label class="form_label" for="EMAIL_ADDRESS">EMAIL ADDRESS</label>
+<input class="form_input form_input--EMAIL_ADDRESS" id="EMAIL_ADDRESS" value="" name="EMAIL_ADDRESS" type="text"/>
+</div>
+<div class="form_input_group">
+<label class="form_label" for="PASSWORD">PASSWORD (at least 12 characters)</label>
+<input class="form_input form_input--PASSWORD" id="PASSWORD" value="" name="PASSWORD" type="password"/>
+</div>
+<div class="form_input_group">
+<label class="form_label" for="PASSWORD2">confirm PASSWORD</label>
+<input class="form_input form_input--PASSWORD2" id="PASSWORD2" value="" name="PASSWORD2" type="password"/>
+</div>
+<div class="form_input_group">
+<label class="form_label" for="TOS">Accept Terms Of Service and Privacy Policy (by selecting YES)</label>
+<select class="dropdown" id="TOS" value="" name="TOS" type="text"/>
+<option>NO</option>
+<option>YES</option>
+</select>
+</div>
+<button class="form_button" type="submit">Submit</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<pa>return to&nbsp</pa><home id="home_href">overlord api homepage</home>
+</form>
+<code class="feedback" id="feedback0"></code>
+<code class="feedback" id="feedback1"></code>
+<code class="feedback" id="feedback2"></code>
+<code class="feedback" id="feedback3"></code>
+</section>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<script>
+'use strict';
+const NEWUSER_AUTHORIZED = 1;
+const ov = 'https://hartmanm.github.io/ov';
+
+var feedback0 = document.getElementById('feedback0');
+feedback0.style.display = "none";
+var feedback1 = document.getElementById('feedback1');
+feedback1.style.display = "none";
+var feedback2 = document.getElementById('feedback2');
+feedback2.style.display = "none";
+var feedback3 = document.getElementById('feedback3');
+feedback3.style.display = "none";
+
+function execute_openrig(element)
+{
+var url = ov;
+window.location.href = url;
+}
+var home_href = document.getElementById('home_href');
+home_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_openrig(target)}, false);
+
+function execute_tos(element)
+{
+var url = ov + "/terms_of_service";
+window.location.href = url;
+}
+var tos = document.getElementById('terms_of_service');
+tos.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_tos(target)}, false);
+
+function execute_pp(element)
+{
+var url = ov + "/privacy_policy";
+window.location.href = url;
+}
+var tos = document.getElementById('privacy_policy');
+tos.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_pp(target)}, false);
+
+var form_to_json = function form_to_json(elements){
+return [].reduce.call(elements, function (data, element){data[element.name] = element.value; return data;}, {});
+};
+var submit_form = function submit_form(event){
+event.preventDefault();
+
+var feedback0 = document.getElementById('feedback0');
+feedback0.innerHTML = "";
+feedback0.style.display = "block";
+var feedback1 = document.getElementById('feedback1');
+feedback1.innerHTML = "";
+feedback1.style.display = "block";
+var feedback2 = document.getElementById('feedback2');
+feedback2.innerHTML = "";
+feedback2.style.display = "block";
+var feedback3 = document.getElementById('feedback3');
+feedback3.innerHTML = "";
+feedback3.style.display = "block";
+
+var data = form_to_json(form.elements);
+if(data.PASSWORD != ""){
+if(data.PASSWORD != null){
+if(data.PASSWORD.length < 12){var feedback = document.getElementById('feedback1').innerHTML = "Password must be at least 12 characters";}
+if(data.EMAIL_ADDRESS != ""){
+if(data.EMAIL_ADDRESS != null){
+if(data.EMAIL_ADDRESS.includes("@") == false){var feedback = document.getElementById('feedback0').innerHTML = "Invalid email address";}
+if(data.TOS != "YES"){var feedback = document.getElementById('feedback3').innerHTML = "You must agree to the TOS by typing YES";}
+if((data.PASSWORD.length >= 12) && (data.EMAIL_ADDRESS.includes("@") == true) && (data.PASSWORD == data.PASSWORD2) && (data.TOS == "YES")){
+var data_box = JSON.stringify(data);
+
+addCustomer(data_box);
+}
+
+if(data.EMAIL_ADDRESS.includes("@") == false){var feedback = document.getElementById('feedback0').innerHTML = "Invalid email address";}
+if(data.PASSWORD.length < 12){var feedback = document.getElementById('feedback1').innerHTML = "Password must be at least 12 characters";}
+if(data.PASSWORD != data.PASSWORD2){var feedback = document.getElementById('feedback2').innerHTML = "Password entries must match";}
+if(data.TOS != "YES"){var feedback = document.getElementById('feedback3').innerHTML = "You must agree to the TOS by typing YES";}
+}
+}
+}
+}
+};
+var form = document.getElementsByClassName('form')[0];
+form.addEventListener('submit', submit_form);
+
+function addCustomer(form_data){
+if(NEWUSER_AUTHORIZED == 1){
+var box = JSON.parse(form_data);
+var payload = JSON.stringify(box);
+var req = new XMLHttpRequest();
+var url = ov + "/customer";
+req.open( "POST", url, true );
+req.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var feedback0 = document.getElementById('feedback0');
+feedback0.innerHTML = "";
+feedback0.style.display = "none";
+var feedback1 = document.getElementById('feedback1');
+feedback1.innerHTML = "";
+feedback1.style.display = "none";
+var feedback2 = document.getElementById('feedback2');
+feedback2.innerHTML = "";
+feedback2.style.display = "none";
+var response = req.responseText;
+var t = document.getElementById('feedback3').innerHTML = response;
+}
+else{console.log( "Error: " + req.statusText );}});
+req.send(payload);
+} //if(NEWUSER_AUTHORIZED == 1)
+}
+</script>
+<br>
+<br>
+<br>
+</body>
+</html>
