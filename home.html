@@ -38,6 +38,8 @@ grid-template-areas:
 .u2 {grid-area: u2;}
 signup:hover,signup:active,signup:focus {color: #CFD0D1; background-color: #12192A; cursor:pointer; outline: 0; text-decoration: none}
 login:hover,login:active,login:focus {color: #CFD0D1; background-color: #12192A; cursor:pointer; outline: 0; text-decoration: none}
+node_list:hover,node_list:active,node_list:focus {color: #CFD0D1; background-color: #12192A; cursor:pointer; outline: 0; text-decoration: none}
+add_node:hover,add_node:active,add_node:focus {color: #CFD0D1; background-color: #12192A; cursor:pointer; outline: 0; text-decoration: none}
 .v {grid-area: v;}
 .t {grid-area: t;}
 .q {grid-area: q;}
@@ -76,6 +78,8 @@ thousand_series2{padding: 2px 2px; font-family: arial, sans-serif; color: #0F640
 thousand_series{font-family: arial, sans-serif; color: #0F640F; border-radius: 2px;}
 signup{padding: 2px 2px; font-family: arial, sans-serif; color: #833F00; background-color: #FFD4B2; border-radius: 2px;}
 login{padding: 2px 2px; font-family: arial, sans-serif; color: #032166; background-color: #CBD3EE; border-radius: 2px;}
+node_list{padding: 2px 2px; font-family: arial, sans-serif; color: #CFD0D1; background-color: #12192A; border-radius: 2px;}
+add_node{padding: 2px 2px; font-family: arial, sans-serif; color: #F0D7FE; background-color: #c7ae9b; border-radius: 2px;}
 ddiv{}
 @media screen and (min-width: 1125px){ddiv{transform: scale(1.25); transition: transform 4s;} .l{max-width:450px; margin-left: auto; margin-right: auto;} .header{padding-top: 100px; text-align:center; color:white;}.footer{width:100%; position:fixed; bottom:-5vw; height: 3.75vw; color:#ffffff; background-color:#677793;}}
 </style>
@@ -93,8 +97,8 @@ ddiv{}
 <div class="ll" id="linkinfo"></div>
 </div>
 <div class="grid-container1" id="main2">
-<div id="list"></div>
-<div id="add_node"></div>
+<div id="list"><node_list>node_list</node_list></div>
+<div id="add_node"><add_node>add_node</add_node></div>
 </div>
 </ddiv>
 <footer class="footer"></footer>
