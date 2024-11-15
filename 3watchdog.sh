@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Copynodeht (c) 2018 Michael Neill Hartman. All nodehts reserved.
+# Copyright (c) 2018 Michael Neill Hartman. All rights reserved.
 # mnh_license@proton.me
 # https://github.com/hartmanm
-# ov (previously opennode.net)
+# ov (previously openrig.net)
 
 ZNODE="/media/ramdisk/0node*"
 znode=$(sed -e 's/\r$//' $ZNODE)
