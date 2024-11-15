@@ -211,16 +211,16 @@ var update_flag=0;
 
 // is called in main // test then add with conditional in reload.  // retest
 function Fis_logged_in(){
-var url = ov + "/loggedin/" + uid;
-fetch(url, {method: "GET",headers: {"Authorization": auth},}).then(data => data.json()).then(data =>{
-logged_in=data;
-//console.log(logged_in);
-//var type_of=(typeof logged_in);
-//var outtext = "logged_in: " + logged_in + " " + type_of;log_event(outtext);
-})
+//var url = ov + "/loggedin/" + uid;
+//fetch(url, {method: "GET",headers: {"Authorization": auth},}).then(data => data.json()).then(data =>{
+//logged_in=data;
+
+logged_in=1;
+//})
 }
 
 function is_logged_in(){
+/*
 var url = ov + "/loggedin/" + uid;
 var req = new XMLHttpRequest();
 req.open("GET", url, false);
@@ -235,6 +235,8 @@ logged_in = response;
 console.log("logged_in: "+logged_in);
 }else{console.log( "Error: " + req.statusText );}
 });req.send( null );
+*/
+logged_in=1;
 }
 
 // is called in getRigs  // retest
