@@ -237,7 +237,7 @@ console.log("logged_in: "+logged_in);
 });req.send( null );
 }
 
-// is called in getGroups and getRigs  // retest
+// is called in getRigs  // retest
 function Fis_last_edit(){
 var url = ov + "/last_edit/" + uid;
 fetch(url, {method: "GET",headers: {"Authorization": auth},}).then(data => data.json()).then(data =>{
@@ -489,7 +489,6 @@ data_box = JSON.stringify(temp);
 log_count = 0;
 
 getDate();
-getGroups(data_box);
 getRigs(data_box);
 is_logged_in();
 if(logged_in != "1"){var url = ov + "/logout/" + session; window.location.href = url;}
@@ -508,7 +507,6 @@ if(log == 1){log_eorc();}
 // update after dev_fee
 if(dev_flag == 1){dev_done = 1;}
 if(dev_done == 1 && dev_flag == 0){
-getGroups(data_box);
 getRigs(data_box);
 dev_done = 0;
 }
@@ -524,7 +522,6 @@ var outtime = returnDate();
 var outtext = "reload_number: " + reload_number + " @ " + outtime;
 log_event(outtext);
 if(update_flag == 1){
-getGroups(data_box);
 getRigs(data_box);
 }
 update_hashrate(data_box);
