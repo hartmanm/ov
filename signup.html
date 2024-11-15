@@ -78,7 +78,7 @@ pa{color:white;}
 <option>YES</option>
 </select>
 </div>
-<button class="form_button" type="submit">Submit</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<pa>return to&nbsp</pa><home id="home_href">overlord api homepage</home>
+<button class="form_button" type="submit">Submit</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<pa>return to&nbsp</pa><home id="home_href">ov api homepage</home>
 </form>
 <code class="feedback" id="feedback0"></code>
 <code class="feedback" id="feedback1"></code>
@@ -126,7 +126,7 @@ var url = ov + "/terms_of_service";
 window.location.href = url;
 }
 var tos = document.getElementById('terms_of_service');
-tos.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_tos(target)}, false);
+//tos.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_tos(target)}, false);
 
 function execute_pp(element)
 {
@@ -134,7 +134,7 @@ var url = ov + "/privacy_policy";
 window.location.href = url;
 }
 var tos = document.getElementById('privacy_policy');
-tos.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_pp(target)}, false);
+//tos.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_pp(target)}, false);
 
 var form_to_json = function form_to_json(elements){
 return [].reduce.call(elements, function (data, element){data[element.name] = element.value; return data;}, {});
