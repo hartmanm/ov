@@ -1,0 +1,1813 @@
+<!--
+# Copyright (c) 2018 Michael Neill Hartman. All rights reserved.
+# mnh_license@proton.me
+# https://github.com/hartmanm
+# ov (previously openrig.net)
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>node list</title>
+</head>
+<body>
+<!--
+<meta name="viewport" content="width=device-width, initial-scale=1">
+-->
+<style>
+body{background:white; -webkit-app-region: drag;} /*  max-width: 860px;  -webkit-app-region: drag;  <meta name="viewport" content="width=device-width, initial-scale=1">  */
+codebc{padding: 1px 1px; font-size: 160%; color: #0F640F; background-color: #DAF0DA; border-radius: 2px;}
+codebc:hover,codebc:active,codebc:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
+code2{border-radius: 2px; font-size: 160%; color: #373a3c; text-decoration: none;}
+code4{border-radius: 2px; font-size: 160%; color: #373a3c; text-decoration: none;}
+codedl{padding: 1px 1px; font-size: 160%; color: #115B4A; background-color: #CFD0D1; border-radius: 2px;}
+codedl:hover,codedl:active,codedl:focus {color: #CFD0D1; background-color: #12192A; cursor: pointer; outline: 0; text-decoration: none}
+codeL{font-size: 160%; color: #833F00; background-color: #FFD4B2; border-radius: 2px;}
+codeL:hover,codeL:focus{color: #CFD0D1; background-color: #12192A; cursor:pointer; outline: 0; text-decoration: none}
+
+codeCH{border-radius: 2px; font-size: 125%; color: #032166;}
+
+codeBASIS{font-size: 125%; color: #833F00; background-color: #FFD4B2; padding: 0.35vw; border-radius: 0.25vw; margin-top: 2vw;}
+codeBASIS:hover,codeBASIS:focus{color: #CFD0D1; background-color: #12192A; cursor:pointer; outline: 0; text-decoration: none}
+
+codeDROP{margin-left: 5vw; padding: 8px 8px; border-radius: 2px; font-size: 125%; color: #6C0800; background-color: #FF8F86; text-decoration: none;}
+codeDROP:hover,codeDROP:active,codeDROP:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
+
+.codeWALLET{color: #032166; background-color: #CBD3EE; padding: 0.35vw; border-radius: 0.25vw; margin-bottom: 2vw; margin-top: 2vw;}
+.codeWALLET:hover,.codeWALLET:active,.codeWALLET:focus{color: #CBD3EE; background-color: #032166; cursor: pointer;outline: 0; text-decoration: none}
+.codeOPEN_WALLET{margin-left: 5vw; font-size: 125%; color: #032166; background-color: #CBD3EE; padding: 0.1vw; border-radius: 0.25vw; max-width:500px;}
+
+nav{width:100%; position:fixed; top:0px; height: 5vw; color:#ffffff; background-color:#746793;}
+.nav_link{margin-left: 5vw; display: inline-block;}
+nav_link{font-size: 130%; font-family: arial, sans-serif; color: #ffffff; background-color: #746793; border-radius: 0.5vw; padding: 0.5vw; margin-top: 1.5vw; margin-bottom: 1.5vw;}
+nav_link:hover,nav_link:active,nav_link:focus {color: #677793; background-color: #ffffff; cursor:pointer; outline: 0; text-decoration: none}
+
+codeCHwithbackground{border-radius: 2px; font-size: 115%; color: #032166; background-color: #CBD3EE;}
+
+codeETC{border-radius: 2px; font-size: 115%; color: #0F5900; background-color: #CFF8CF; text-decoration: none;}
+codeETC:hover,codeETC:active,codeETC:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
+codeETH{border-radius: 2px; font-size: 115%; color: #380057; background-color: #DBA5F8; text-decoration: none;}
+codeETH:hover,codeETH:active,codeETH:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
+codeETHa{border-radius: 2px; font-size: 115%; color: #F0D7FE; background-color: #DBA5F8; text-decoration: none;}
+codeRVN{border-radius: 2px; font-size: 115%; color: #9e2c11; background-color: #c7ae9b; text-decoration: none;}
+codeRVN:hover,codeRVN:active,codeRVN:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
+codeRVNa{border-radius: 2px; font-size: 115%; color: #F0D7FE; background-color: #c7ae9b; text-decoration: none;}
+codeNICE{border-radius: 2px; font-size: 115%; color: #8e7f02; background-color: #f7f5b8; text-decoration: none;}
+codeNICE:hover,codeNICE:active,codeNICE:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
+codeNICEa{border-radius: 2px; font-size: 115%; color: #F0D7FE; background-color: #c7ae9b; text-decoration: none;}
+codeANON{border-radius: 2px; font-size: 115%; color: #c7254e; background-color: #f9f2f4; text-decoration: none;}
+codeANON:hover,codeANON:active,codeANON:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
+codeAION{border-radius: 2px; font-size: 115%; color: #152569; background-color: #85c8e8; text-decoration: none;}
+codeAION:hover,codeANON:active,codeANON:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
+codeBTG{border-radius: 2px; font-size: 115%; color: #152569; background-color: #a1b0f7; text-decoration: none;}
+codeBTG:hover,codeBTG:active,codeBTG:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
+
+.btg{color: #152569; background-color: #a1b0f7;}
+.aion{color: #152569; background-color: #85c8e8;}
+.anon{color: #c7254e; background-color: #f9f2f4;}
+
+codedelete{padding: 1px 1px; font-size: 115%; color: #6C0800; background-color: #FF8F86; border-radius: 2px;}
+codedelete:hover,codedelete:active,codedelete:focus {color: #CFD0D1; background-color: #12192A; cursor: pointer; outline: 0; text-decoration: none}
+space{margin-left: 20px;}
+.droplist{margin-top: 2px; margin-bottom: 2px;}
+
+h1,h2 {color: #2a2f2c;font-family: Lato, sans-serif;font-weight: 300;line-height: 1.125;}
+button[type="submit"]{margin-left: 24px; margin-top: 35px; margin-bottom: 35px; display: flex; justify-content: center; align-items: center;  width: 75px; height: 25px; background: transparent;
+border-radius: 10px; will-change: transform; transition: all 0.4s ease; border: 2px solid #032166; cursor: pointer; color: #fff; font-size: 12px;
+color: #032166; outline: none; text-align: center;}
+button[type="submit"]:hover{background: #032166; color: #fff;}
+button[type="submit"]:active{border-right: 2px solid #fff; animation: loader 0.75s linear infinite;}
+button[type="submit"].success{background: #0F640F; border-color: #0F640F; font-size: 12px; color: #fff;}
+@keyframes loader{0%{transform: rotateZ(0);}100%{transform: rotateZ(360deg);}}
+ab{color: #833F00; background-color: #FFD4B2; text-decoration: none}
+
+.editable_text{padding: 2px 2px; font-size: 115%; color: #380057; background-color: #DBA5F8; border-radius: 1px;}
+.edited_text{padding: 2px 2px; font-size: 120%; color: #032166; background-color: #CBD3EE; border-radius: 1px;}
+.text_editor{border: none; background: #ddd; color: #000; font-size: 150%; font-family: arial; width: 50px; cursor: text;}
+
+code{font-family: arial, sans-serif; color: #032166; background-color: #CBD3EE; border-radius: 0.5vw; padding: 0.35vw; margin-top: 4vw;}
+.log{margin-left: 5.75vw;} /*  margin-top: 25px; margin-bottom: 25px;} */
+
+.console{margin-left: 5.75vw; font-size: 115%; margin-right: 25px; padding: 5px; border-radius: 5px; margin-bottom: 1.5vw; margin-top: 1.5vw;}
+
+.footer{width:100%; position:fixed; bottom:0px; height: 2vw; color:#ffffff; background-color:#677793;}
+
+.grid-container0 {
+display: grid;
+align: left;
+column-gap: 5.75vw;
+max-width:450px;
+justify-items: left;
+}
+.a_etc {grid-column: 1;}
+.b_eth {grid-column: 2;}
+
+.wallet_base{
+display: grid;
+align: center;
+grid-template-columns: 2.75vw;
+grid-auto-columns: 2.75vw;
+column-gap: 5.75vw;
+padding-top: 1vw;
+padding-bottom: 1vw;
+max-width:450px;
+justify-items: left;
+}
+.zz{grid-column: 1;}
+.codeWALLET{grid-column: 2;}
+
+.grid-containerEMPTY_BASIS{
+display: grid;
+align: center;
+grid-template-columns: 2.75vw;
+grid-auto-columns: 2.75vw;
+column-gap: 5.75vw;
+max-width:450px;
+justify-items: center;
+padding-bottom: 1vw;
+padding-top: 1vw;
+}
+.zz{grid-column: 1;}
+.z {grid-column: 2;}
+
+.grid-containerBASIS{
+display: grid; align: center;
+grid-template-columns: 2.75vw;
+grid-auto-columns: 2.75vw;
+column-gap: 5.75vw;
+max-width:450px;
+justify-items: center;
+padding-bottom: 1vw;
+padding-top: 1vw;
+}
+.zz{grid-column: 1;}
+.z {grid-column: 2;}
+
+.grid-containerGROUP{
+display: grid; align: center;
+grid-template-columns: 2.75vw;
+grid-auto-columns: 2.75vw;
+column-gap: 5.75vw;
+max-width:40vw;
+justify-items: center;
+padding-bottom: 1vw;
+padding-top: 1vw;
+}
+.zz{grid-column: 1;}
+.z {grid-column: 2;}
+.y {grid-column: 3;}
+.x {grid-column: 4;}
+.w {grid-column: 5;}
+.v {grid-column: 6;}
+
+.grid-containerGROUPS{
+display: grid;
+align: center;
+border: 1px solid #ccc;
+grid-template-columns: 2.75vw;
+grid-auto-columns: 2.75vw;
+column-gap: 5.75vw;
+max-width:40vw;
+justify-items: center;
+padding-bottom: 1vw;
+padding-top: 1vw;
+}
+.zz{grid-column: 1;}
+.z {grid-column: 2;}
+.y {grid-column: 3;}
+.x {grid-column: 4;}
+.w {grid-column: 5;}
+.v {grid-column: 6;}
+.grid-containerGROUPS:nth-child(even){background-color: #E8E8E8; max-width:40vw;}
+
+.grid-container3{
+display: grid;
+align: center;
+grid-template-columns: 2.75vw;
+grid-auto-columns: 2.75vw;
+column-gap: 5.75vw;
+margin-left: auto;
+margin-right: auto;
+justify-items: center;
+padding-bottom: 1vw;
+padding-top: 1vw;
+}
+.za{grid-column: 1;}
+.a {grid-column: 2;}
+.b {grid-column: 3;}
+.c {grid-column: 4;}
+.d {grid-column: 5;}
+.e {grid-column: 6;}
+.k{grid-column: 7;}
+.l{grid-column: 8;}
+.m{grid-column: 9;}
+.n{grid-column: 10;}
+.o{grid-column: 11;}
+.zb{grid-column: 12;}
+
+.grid-container2{
+display: grid;
+align: center;
+grid-template-columns: 2.75vw;
+grid-auto-columns: 2.75vw;
+column-gap: 5.75vw;
+border: 1px solid #ccc;
+margin-left: auto;
+margin-right: auto;
+justify-items: center;
+padding-bottom: 1vw;
+padding-top: 1vw;
+}
+.za{grid-column: 1;}
+.a {grid-column: 2;}
+.b {grid-column: 3;}
+.c {grid-column: 4;}
+.d {grid-column: 5;}
+.e {grid-column: 6;}
+.k{grid-column: 7;}
+.l{grid-column: 8;}
+.m{grid-column: 9;}
+.n{grid-column: 10;}
+.o{grid-column: 11;}
+.zb{grid-column: 12;}
+.grid-container2:nth-child(even){background-color: #E8E8E8;}
+.ddiv{justify-items: center; overflow:hidden; width:100%;}
+.section{width:100%; margin-left: auto; margin-right: auto;}
+
+@media screen and (min-width: 1125px){
+.section{transform: scale(0.70); transition: transform 4s;}
+.nav_link{margin-left: 7vw; display: inline-block;}
+.console{margin-left: 5.75vw; font-size: 140%; margin-right: 25px; padding: 5px; border-radius: 5px; margin-bottom: 1.5vw; margin-top: 1.5vw;} .log{ font-size: 140%; margin-left: 5.75vw;}
+}
+
+</style>
+<div class="ddiv">
+<nav>
+<!--
+<nav_link class="nav_link" id="logout"></nav_link><nav_link class="nav_link" id="setup_guide">Setup Guide</nav_link>
+-->
+<nav_link class="nav_link" id="logout"></nav_link>
+<nav_link class="nav_link" id="downloadoros"></nav_link><nav_link class="nav_link" id="faq">FAQ</nav_link>
+<nav_link class="nav_link" id="changelog">Changelog</nav_link>
+<nav_link class="nav_link" id="log_ex_cl">LOG</nav_link>
+<nav_link class="nav_link" id="wallet_ex_cl">Pool Links</nav_link>
+</nav>
+<div class="section">
+<br><br><br><br>
+<div id="log"></div>
+<br>
+<div id="droplist"></div>
+<div id="wallet" class="wallet_base"></div>
+<div id="GROUPS"></div>
+<div id="console" class="console"></div>
+<div id="RIGS"></div>
+</div>
+</div>
+<br><br><br><br><br><br>
+<div class="footer">
+<script>
+'use strict';
+const ov = 'https://hartmanm.github.io/ov';
+var add_basis_url = "https://hartmanm.github.io/ov/basis/";
+var add_group_url = "https://hartmanm.github.io/ov/addgroup/";
+var edit_group_url = "https://hartmanm.github.io/ov/editgroup/";
+var add_rig_url = "https://hartmanm.github.io/ov/addrig/";
+var edit_rig_url = "https://hartmanm.github.io/ov/editrig/";
+
+var profibility_url = "";
+
+var log = 0;
+var dev_flag = "";
+var dev_done = 0;
+var uid = "";
+var auth = "";
+var ckey = "";
+var session = "";
+var data_box = "";
+var droplist = [];
+var number_of_groups = 0;
+var group1_hashrate = 0;
+var group2_hashrate = 0;
+var group3_hashrate = 0;
+var group4_hashrate = 0;
+var group5_hashrate = 0;
+var basis = {};
+var group1 = {};
+var group2 = {};
+var group3 = {};
+var group4 = {};
+var group5 = {};
+var group_rig = {};
+var group_rig_flag = 0;
+var average_cycle = [];
+var timeout = [];
+var delete_rig = 0;
+var delete_group = 0;
+var reload_number = 0;
+var lognodes = [];
+var log_count = 0;
+var number_of_rigs = 0;
+var start_hours = 0;
+var start_minutes = 0;
+var currentRIG_LOG=0;
+var logged_in="0";
+var last_edit=0;
+var cur_edit=1;
+var update_flag=0;
+
+
+// is called in main // test then add with conditional in reload.  // retest
+function Fis_logged_in(){
+var url = ov + "/loggedin/" + uid;
+fetch(url, {method: "GET",headers: {"Authorization": auth},}).then(data => data.json()).then(data =>{
+logged_in=data;
+//console.log(logged_in);
+//var type_of=(typeof logged_in);
+//var outtext = "logged_in: " + logged_in + " " + type_of;log_event(outtext);
+})
+}
+
+function is_logged_in(){
+var url = ov + "/loggedin/" + uid;
+var req = new XMLHttpRequest();
+req.open("GET", url, false);
+req.setRequestHeader('Authorization', auth);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = req.responseText;
+var i = 0
+while (i < 200)
+{response = response.replace('"', ''); i++;}
+logged_in = response;
+console.log("logged_in: "+logged_in);
+}else{console.log( "Error: " + req.statusText );}
+});req.send( null );
+}
+
+
+// is called in getGroups and getRigs  // retest
+function Fis_last_edit(){
+var url = ov + "/last_edit/" + uid;
+fetch(url, {method: "GET",headers: {"Authorization": auth},}).then(data => data.json()).then(data =>{
+last_edit=data;
+//console.log(last_edit);
+})
+}
+
+function is_last_edit(){
+var url = ov + "/last_edit/" + uid;
+var req = new XMLHttpRequest();
+req.open("GET", url, false);
+req.setRequestHeader('Authorization', auth);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = req.responseText;
+var i = 0
+while (i < 200)
+{response = response.replace('"', ''); i++;}
+last_edit = response;
+console.log("last_edit: "+last_edit);
+}else{console.log( "Error: " + req.statusText );}
+});req.send( null );
+}
+
+
+function view_console(e)
+{
+var element = e.value;
+var resp = JSON.parse(element);
+var self = resp.self;
+var rignum = parseInt(resp.RIG_NUMBER);
+var cs = document.getElementById("console");
+if(currentRIG_LOG==rignum){cs.innerHTML = "";currentRIG_LOG=0;}
+else{
+var oc;
+if(resp.COIN == "RVN"){oc = resp.X16R_SPECIFIC_OC_SETTINGS}
+if(resp.COIN == "CLIENT"){oc = resp.CLIENT_OC}
+// newmod
+cs.innerHTML="Rig " + rignum + "<br>" + "Private IP: " + resp.RIG_IP + "     Public IP: " + resp.PUBLIC_IP + "     MAC Address: " + resp.RIG_MAC + "<br>" + "OC: " + oc + "<br>" + "GPUs: " + resp.NUMBER_OF_GPUS + "<br><br>" + resp.RIG_LOG;
+var outtext = "output rig: " + rignum + " to console log";
+log_event(outtext);
+currentRIG_LOG=rignum;
+}
+}
+
+function re2unix(e)
+{
+if(dev_flag == 0){
+var element = e.value;
+e.innerHTML = "..";
+var resp = JSON.parse(element);
+var self = resp.self;
+var rignum = parseInt(resp.RIG_NUMBER);
+var go_up = resp.RIG_NUMBER + 'up';
+var up = document.getElementById(go_up);
+var rignum = parseInt(resp.RIG_NUMBER);
+var payload = resp;
+var temp = {};
+temp['self'] = self;
+temp['RE2UNIX'] = "YES";
+var result = {};
+result = JSON.stringify(temp);
+payload = result;
+var req = new XMLHttpRequest();
+var url = ov + self;
+req.open( "PATCH", url, true );
+req.setRequestHeader('Authorization', auth);
+req.setRequestHeader("Content-Type", "application/json");
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){var response = JSON.stringify( req.responseText );}
+else{console.log( "Error: " + req.statusText ); isgo = 0;}});
+req.send(payload);
+var outtext = "restarting mining process: " + rignum;
+log_event(outtext);
+function innerback(){e.innerHTML = "reclient";}
+var timer = setInterval(innerback, 60000);
+}
+}
+
+function downloadoros(content, fileName, contentType)
+{
+var d_id = "ag1wfm92ZXJsb3JkLW52chsLEg5Eb3dubG9hZF9jbGFzcxiAgICA_pOICgw";
+var self = "/downloads/" + d_id;
+var bullet = {};
+bullet['NUMBER_OF_DOWNLOADS'] = 1;
+var payload = JSON.stringify(bullet);
+var req = new XMLHttpRequest();
+var url = ov + self;
+req.open( "PATCH", url, true );
+req.setRequestHeader("Content-Type", "application/json");
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){var response = JSON.stringify(req.responseText);}
+else{console.log("Error: " + req.statusText);}});
+req.send(payload);
+var url = ov +"/download"
+window.open(url);
+}
+var down = document.getElementById('downloadoros');
+var dl_url = {};
+dl_url['TEST'] = "complete!";
+var oros = JSON.stringify(dl_url);
+var filename = 'oros_v1';
+down.addEventListener("click", function(e){var target = e.target || e.srcElement; downloadoros(oros, filename, 'plain')}, false);
+down.class = "downloadoros";
+down.innerHTML = "download oros v1.4";
+
+
+function execute_changelog(element)
+{
+var url = ov + "/changelog"
+window.open(url);
+}
+var home_href = document.getElementById('changelog');
+home_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_changelog(target)}, false);
+
+function execute_faq(element)
+{
+var url = ov + "/faq"
+window.open(url);
+}
+var home_href = document.getElementById('faq');
+home_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_faq(target)}, false);
+
+/*
+function execute_setup_guide(element)
+{
+var url = ov + "/setup_guide";
+window.open(url);
+}
+var lamda_link = document.getElementById('setup_guide');
+lamda_link.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_setup_guide(target)}, false);
+*/
+
+
+function get_auth()
+{
+var newURL = window.location.toString();
+var here = newURL.indexOf("S");
+var resp = newURL.slice(here);
+session = resp;
+var url = ov + "/sid_auth/" + resp;
+var req = new XMLHttpRequest();
+req.open("GET", url, false);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = req.responseText;
+var i = 0
+while (i < 200)
+{response = response.replace('"', ''); i++;}
+auth = response;
+}else{console.log( "Error: " + req.statusText );}
+});req.send( null );
+}
+get_auth();
+
+
+function get_uid()
+{
+var newURL = window.location.toString();
+var here = newURL.indexOf("S");
+var resp = newURL.slice(here);
+session = resp;
+var url = ov + "/sid_uid/" + resp;
+var req = new XMLHttpRequest();
+req.open("GET", url, false);
+req.setRequestHeader('Authorization', auth);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = req.responseText;
+var i = 0
+while (i < 200)
+{response = response.replace('"', ''); i++;}
+uid = response;
+}else{console.log( "Error: " + req.statusText );}
+});req.send( null );
+}
+get_uid();
+
+
+function get_ckey(){
+var url = ov + "/sid_ckey/" + session;
+var req = new XMLHttpRequest();
+req.open("GET", url, false);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = req.responseText;
+var i = 0
+while (i < 200)
+{response = response.replace('"', ''); i++;}
+ckey = response;
+}else{console.log( "Error: " + req.statusText );}
+});req.send( null );
+}
+get_ckey();
+
+
+function log_eorc(){
+var element = document.getElementById("log");
+if(element != ""){
+var i = 0;
+for(i = 0; i < log_count; i++){
+var target_log = lognodes[i];
+var child_select = document.getElementById(target_log);
+if(child_select.style.display == "none"){
+child_select.style.display = "block";
+log = 1;
+}
+else
+{
+child_select.style.display = "none";
+log = 0;
+}
+}
+}
+}
+//setup log expand button
+var push = document.getElementById("log_ex_cl");
+push.addEventListener("click", function(e){var target = e.target || e.srcElement; log_eorc(target)}, false);
+
+//setup wallet expand button
+var wallet_ex_cl = document.getElementById("wallet_ex_cl");
+wallet_ex_cl.addEventListener("click", function(e){var target = e.target || e.srcElement; content_hide_show_toggle(target)}, false);
+
+function log_event(new_log_event){
+var push = document.getElementById("log");
+var space = document.createElement("div");
+space.innerHTML = "<br>";
+space.id = "log" + log_count;
+space.style.display = "none";
+push.appendChild(space);
+lognodes[log_count] = space.id;
+log_count++;
+var log = document.createElement("div");
+log.innerHTML = new_log_event;
+log.className = "log";
+log.id = "log" + log_count;
+log.style.display = "none";
+push.appendChild(log);
+lognodes[log_count] = log.id;
+log_count++;
+}
+
+function log_event_rig_timeout(new_log_event, rn){
+if(droplist[rn] != 1){
+var push = document.getElementById("droplist");
+var log = document.createElement("codeDROP");
+log.innerHTML = new_log_event;
+log.className = "droplist";
+push.appendChild(log);
+
+function rm_notice(element)
+{
+droplist[rn] = 0;
+element.style.display = "none";
+}
+log.addEventListener("click", function(e){var target = e.target || e.srcElement; rm_notice(target)}, false);
+
+var space = document.createElement("div");
+space.innerHTML = "<br>";
+push.appendChild(space);
+}
+droplist[rn] = 1;
+}
+
+function getDate(){
+var d = new Date();
+var hours = d.getHours();
+start_hours = hours;
+if(hours < 10){hours = "0" + hours;}
+var minutes = d.getMinutes();
+start_minutes = minutes;
+if(minutes < 10){minutes = "0" + minutes;}
+var dtg = "start: " + hours + "" + minutes;
+log_event(dtg);
+}
+
+function returnDate(){
+var d = new Date();
+var hours = d.getHours();
+if(hours < 10){hours = "0" + hours;}
+var minutes = d.getMinutes();
+if(minutes < 10){minutes = "0" + minutes;}
+var dtg = hours + "" + minutes;
+return dtg;
+}
+
+function returnHours(){
+var d = new Date();
+var hours = d.getHours();
+return hours;
+}
+
+function returnMinutes(){
+var d = new Date();
+var minutes = d.getMinutes();
+return minutes;
+}
+
+
+// primary function
+var submit_form = function submit_form(event){
+var temp = {}
+temp['id'] = uid;
+data_box = JSON.stringify(temp);
+log_count = 0;
+
+getDate();
+getGroups(data_box);
+getRigs(data_box);
+is_logged_in();
+if(logged_in != "1"){var url = ov + "/logout/" + session; window.location.href = url;}
+update_hashrate(data_box);
+
+function refresh(){
+is_logged_in();
+if(logged_in != "1"){var url = ov + "/logout/" + session; window.location.href = url;}
+is_last_edit();
+if(cur_edit > last_edit){update_flag=1; last_edit=cur_edit;}
+else{update_flag=0;}
+reload_number++;
+var cs = document.getElementById("console");
+cs.innerHTML = "";
+if(log == 1){log_eorc();}
+// update after dev_fee
+if(dev_flag == 1){dev_done = 1;}
+if(dev_done == 1 && dev_flag == 0){
+getGroups(data_box);
+getRigs(data_box);
+dev_done = 0;
+}
+var now_hours = returnHours();
+var now_minutes = returnMinutes();
+var duration = 0;
+if(start_hours != now_hours){
+duration+=((60-start_minutes)+now_minutes)
+if(duration >= 60){var url = ov + "/logout/" + session; window.location.href = url;}
+}
+if(reload_number >= 60){var url = ov + "/logout/" + session; window.location.href = url;}
+var outtime = returnDate();
+var outtext = "reload_number: " + reload_number + " @ " + outtime;
+log_event(outtext);
+if(update_flag == 1){
+getGroups(data_box);
+getRigs(data_box);
+}
+update_hashrate(data_box);
+}
+var timer1 = setInterval(refresh, 60000);
+};
+submit_form();  // init on load
+
+
+function execute_logout(element)
+{
+var url = ov + "/logout/" + session;
+window.location.href = url;
+}
+var home_href = document.getElementById('logout');
+home_href.innerHTML = "Logout";
+home_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_logout(target)}, false);
+
+
+// update individual rig changes
+// update individual rig hashrates  // group hashrates
+function update_hashrate(form_data){
+
+var url = ov + "/user/" + uid;
+var req = new XMLHttpRequest();
+req.open("GET", url, false);
+req.setRequestHeader('Authorization', auth);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = JSON.parse(req.responseText);
+dev_flag = response['dev_flag'];
+}else{console.log( "Error: " + req.statusText );}
+});req.send(null);
+
+if(dev_flag == 0){
+group1_hashrate = 0;
+group2_hashrate = 0;
+group3_hashrate = 0;
+group4_hashrate = 0;
+group5_hashrate = 0;
+
+var i = 0;
+var user_id = uid;
+var req = new XMLHttpRequest();
+var url = ov + "/user/" + user_id + "/rigs";
+req.open("GET", url, false);
+req.setRequestHeader('Authorization', auth);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = JSON.parse(req.responseText);
+var numrigs = response.length;
+for (i = 0; i < response.length; i++){
+var num = response[i];
+var req2 = new XMLHttpRequest();
+var rig_url = ov + num;
+req2.open("GET", rig_url, false);
+req2.setRequestHeader('Authorization', auth);
+req2.addEventListener( "load",function(){
+if( req2.status >= 200 && req2.status < 403 ){
+var resp2 = JSON.parse(req2.responseText);
+
+//new hashrate code:
+var target_rig = document.getElementById(i+1);
+var the_rig_number = i+1;
+target_rig.innerHTML = resp2.HASHRATE;
+
+// update rig RIG_LOG
+var con = document.getElementById("console");
+var rignum = parseInt(resp2.RIG_NUMBER);
+if(currentRIG_LOG == rignum){
+var oc;
+if(resp2.COIN == "RVN"){oc = resp2.X16R_SPECIFIC_OC_SETTINGS}
+if(resp2.COIN == "CLIENT"){oc = resp2.CLIENT_OC}
+// newmod
+con.innerHTML="Rig " + rignum + "<br>" + "Private IP: " + resp2.RIG_IP + "     Public IP: " + resp2.PUBLIC_IP + "     MAC Address: " + resp2.RIG_MAC + "<br>" + "OC: " + oc + "<br>" + "GPUs: " + resp2.NUMBER_OF_GPUS + "<br><br>" + resp2.RIG_LOG;
+}
+
+
+// update all RIG_LOGs
+var tar=resp2.RIG_NUMBER + 'cs';
+var con = document.getElementById(tar);
+con.value = JSON.stringify(resp2);
+
+var not_hashing_flag = 0;
+
+if(resp2.HASHRATE == NaN){not_hashing_flag = 1;}
+if(resp2.HASHRATE == "NaN"){not_hashing_flag = 1;}
+
+if(not_hashing_flag == 0){var int_hashrate = parseInt(resp2.HASHRATE);}
+else{var int_hashrate = 0;}
+
+var target_group = document.getElementById('g' + resp2.GROUP_NUMBER);
+
+// timeout check
+var last_cycle = average_cycle[the_rig_number];
+average_cycle[the_rig_number] = parseInt(resp2.CYCLE);
+if(average_cycle[the_rig_number] != last_cycle){timeout[the_rig_number] = 0;}
+
+if(average_cycle[the_rig_number] == last_cycle && reload_number > 0)
+{
+
+timeout[the_rig_number]++;
+if(timeout[the_rig_number] > 1){
+target_rig.innerHTML = "0";
+int_hashrate = 0;
+
+var self = resp2.self;
+
+var d = new Date();
+var hours = d.getHours();
+var minutes = d.getMinutes();
+var dtg = hours + "" + minutes;
+
+var outtext = " " + the_rig_number + " . " + dtg;
+log_event_rig_timeout(outtext, the_rig_number);
+log_event(outtext);
+
+var bullet = {};
+bullet['HASHRATE'] = "0";
+var payload = JSON.stringify(bullet);
+
+var req = new XMLHttpRequest();
+var url = ov + self;
+req.open( "PATCH", url, true );
+req.setRequestHeader('Authorization', auth);
+req.setRequestHeader("Content-Type", "application/json");
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){var response = JSON.stringify(req.responseText);}
+else{console.log("Error: " + req.statusText);}});
+req.send(payload);
+console.log("received");
+}
+}
+
+if(not_hashing_flag == 0){
+if(group1 != "" || group1 != null){if(resp2.GROUP_NUMBER == 1){group1_hashrate += int_hashrate; target_group.innerHTML = group1_hashrate;}}
+if(group2 != "" || group2 != null){if(resp2.GROUP_NUMBER == 2){group2_hashrate += int_hashrate; target_group.innerHTML = group2_hashrate;}}
+if(group3 != "" || group3 != null){if(resp2.GROUP_NUMBER == 3){group3_hashrate += int_hashrate; target_group.innerHTML = group3_hashrate;}}
+if(group4 != "" || group4 != null){if(resp2.GROUP_NUMBER == 4){group4_hashrate += int_hashrate; target_group.innerHTML = group4_hashrate;}}
+if(group5 != "" || group5 != null){if(resp2.GROUP_NUMBER == 5){group5_hashrate += int_hashrate; target_group.innerHTML = group5_hashrate;}}
+}
+var resp = {};
+resp = resp2;
+
+}else{console.log( "Error: " + req2.statusText );}});req2.send(null);}
+}else{console.log( "Error: " + req.statusText );}});req.send(null);
+}
+}
+
+
+function download(content, fileName, contentType) {
+var a = document.createElement("a");
+var file = new Blob([content], {type: contentType});
+a.href = URL.createObjectURL(file);
+a.download = fileName;
+a.click();
+}
+
+
+function renull_reboot(){
+var rignum = rn.shift();
+var element = reboot_element[rignum];
+var e = reboot_trans[rignum];
+var resp = JSON.parse(e);
+var self = resp.self;
+var payload = resp;
+var temp = {};
+temp['REBOOT'] = "1";
+var result = {};
+result = JSON.stringify(temp);
+payload = result;
+var req = new XMLHttpRequest();
+var url = ov + self;
+req.open( "PATCH", url, true );
+req.setRequestHeader('Authorization', auth);
+req.setRequestHeader("Content-Type", "application/json");
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = JSON.stringify( req.responseText );}
+else{console.log( "Error: " + req.statusText ); isgo = 0;}});
+req.send( payload );
+element.innerHTML = "reboot";
+}
+
+function shell(){setTimeout(renull_reboot, 170000);}
+var reboot_trans = [];
+var reboot_element = [];
+var rn = [];
+
+function send_reboot(e){
+if(dev_flag == 0){
+var element = e.value;
+e.innerHTML = "..";
+var resp = JSON.parse(element);
+var self = resp.self;
+var rignum = parseInt(resp.RIG_NUMBER);
+var payload = resp;
+var temp = {};
+temp['self'] = self;
+temp['REBOOT'] = "YES";
+var target_rig = document.getElementById(rignum);
+target_rig.innerHTML = "..";
+temp['HASHRATE'] = "0";
+var result = {};
+result = JSON.stringify(temp);
+payload = result;
+var req = new XMLHttpRequest();
+var url = ov + self;
+req.open( "PATCH", url, true );
+req.setRequestHeader('Authorization', auth);
+req.setRequestHeader("Content-Type", "application/json");
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){var response = JSON.stringify( req.responseText );}
+else{console.log( "Error: " + req.statusText ); isgo = 0;}});
+req.send(payload);
+reboot_trans[rignum] = payload;
+reboot_element[rignum] = e;
+rn.push(rignum);
+var outtext = "rebooting: " + rignum;
+log_event(outtext);
+shell();
+}
+}
+
+
+// delete last rig
+function delete_last(target,resp,form_data){
+if(dev_flag == 0){
+if(delete_rig == 1){
+var element = target.value;
+target.innerHTML = "..";
+var resp = JSON.parse(element);
+var self = resp.self;
+var rignum = parseInt(resp.RIG_NUMBER);
+var payload = resp;
+var temp = {};
+// rig
+temp['self'] = self;
+temp['id'] = uid;
+// user
+var resp2 = JSON.parse(form_data);
+
+function delete_request(url){
+return fetch(url,{method: 'delete', headers: {'Authorization': auth}}).then(data => data.json()).then(data => {
+return data;})}
+
+var url = ov + "/user/" + uid + self;
+delete_request(url);
+
+var url = ov + self;
+delete_request(url);
+
+function refresh(){
+getRigs(form_data);
+var outtext = "rig deleted";
+log_event(outtext);
+}
+var timer = setTimeout(refresh, 2000);
+}
+}
+}
+
+
+// delete GROUP selection
+function delete_last_group(target,resp,form_data){
+if(dev_flag == 0){
+if(delete_group == 1){
+var element = target.value;
+target.innerHTML = "..";
+var group_number = parseInt(resp.GROUP_NUMBER);
+var group_var = {};
+if(group_number == 5){group_var['group5'] = "";}
+if(group_number == 4){group_var['group4'] = "";}
+if(group_number == 3){group_var['group3'] = "";}
+if(group_number == 2){group_var['group2'] = "";}
+if(group_number == 1){group_var['group1'] = "";}
+
+var resp2 = JSON.parse(form_data);
+
+var payload = JSON.stringify(group_var);
+var req = new XMLHttpRequest();
+var url = ov + "/user/" + uid;
+req.open( "PATCH", url, true );
+req.setRequestHeader('Authorization', auth);
+req.setRequestHeader("Content-Type", "application/json");
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){var response = JSON.stringify(req.responseText);}
+else{console.log("Error: " + req.statusText);}});
+req.send(payload);
+
+
+function refresh(){
+getGroups(form_data);
+var outtext = "group deleted";
+log_event(outtext);
+}
+var timer = setTimeout(refresh, 4000);
+}
+}
+}
+
+
+// add groups section
+function addGroups(resp, cur, form_data){
+var divid = document.getElementById("GROUPS");
+var base = cur + 1;
+
+if(cur === 0){while (divid.firstChild ){divid.removeChild(divid.firstChild);}}
+if(base == 1){
+var grid_basis = document.createElement("gridBASIS");
+grid_basis.className = "grid-containerBASIS";
+if(basis == "" || basis == null){grid_basis.className = "grid-containerEMPTY_BASIS";}
+divid.appendChild(grid_basis);
+
+var grid_group = document.createElement("gridGROUP");
+grid_group.className = "grid-containerGROUP";
+divid.appendChild(grid_group);
+
+
+var plus_basis = document.createElement("codeBASIS");
+function execute_basis(element)
+{
+var url = add_basis_url + session;
+window.location.href = url;
+}
+plus_basis.className = "z";
+plus_basis.setAttribute("id", "plus_basis");
+plus_basis.innerHTML = "SETTINGS";
+if(basis == "" || basis == null){plus_basis.innerHTML = "SETTINGS: START HERE!";}
+plus_basis.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_basis(target)}, false);
+grid_basis.appendChild(plus_basis);
+
+var one = document.createElement("codevv");
+one.innerHTML = "<br>";
+grid_basis.appendChild(one);
+
+
+var plus_group = document.createElement("codeL");
+function execute_plus_group(element)
+{
+if(number_of_groups < 5){
+var url = add_group_url + session;
+window.location.href = url;}
+}
+plus_group.className = "z";
+plus_group.setAttribute("id", "plus_group");
+plus_group.innerHTML = "+Group";
+plus_group.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_plus_group(target)}, false);
+grid_group.appendChild(plus_group);
+
+
+var fs = document.createElement("codeCH");
+fs.innerHTML = "H/s";
+fs.className = "y";
+grid_group.appendChild(fs);
+
+var rn = document.createElement("codeCH");
+rn.innerHTML = "GN";
+rn.className = "x";
+grid_group.appendChild(rn);
+
+var cn = document.createElement("codeCH");
+cn.innerHTML = "CL";
+cn.className = "w";
+cn.id = "group_coin_selector";
+grid_group.appendChild(cn);
+
+
+var enable_gd = document.createElement("codeL");
+function execute_enable_group_delete(element)
+{
+var element2 = document.getElementById("delete_group");
+var vis = 0.5;
+if(element2 != ""){
+if(element2.style.opacity == 0.01){
+vis = 1.0;
+element2.style.opacity = vis;
+delete_group = 1;
+element.innerHTML = "lock";
+}
+else{
+vis = 0.01;
+element2.style.opacity = vis;
+delete_group = 0;
+element.innerHTML = "delete";
+}
+}
+}
+enable_gd.innerHTML = "delete";
+enable_gd.className = "v";
+enable_gd.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_enable_group_delete(target)}, false);
+grid_group.appendChild(enable_gd);
+}
+
+var resp = JSON.parse(resp);
+
+
+var mydivs = [];
+mydivs[base] = document.createElement("grid2");
+var curg2 = mydivs[base];
+curg2.className = "grid-containerGROUPS";
+divid.appendChild(curg2);
+
+
+var myedits = [];
+myedits[base] = document.createElement("codeL");
+var edits = myedits[base];
+function execute_edit_group(element)
+{
+var gn = base;
+var url = edit_group_url + session + gn;
+window.location.href = url;
+}
+edits.className = "z";
+edits.innerHTML = "Edit";
+edits.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_edit_group(target)}, false);
+curg2.appendChild(edits);
+
+
+var mych2 = [];
+if(base % 2 == 1){mych2[base] = document.createElement("code2");}
+if(base % 2 == 0){mych2[base] = document.createElement("code4");}
+var ch2 = mych2[base];
+ch2.value = resp.COIN;
+ch2.id = 'g' + resp.GROUP_NUMBER;
+ch2.innerHTML = "..";
+ch2.className = "y";
+curg2.appendChild(ch2);
+
+var mygn = [];
+if(base % 2 == 1){mygn[base] = document.createElement("code2");}
+if(base % 2 == 0){mygn[base] = document.createElement("code4");}
+var gn2 = mygn[base];
+gn2.innerHTML = base;
+gn2.className = "x";
+curg2.appendChild(gn2);
+
+var mycn2 = [];
+if(base % 2 == 1){mycn2[base] = document.createElement("code2");}
+if(base % 2 == 0){mycn2[base] = document.createElement("code4");}
+var cn2 = mycn2[base];
+cn2.id = 'g' + resp.GROUP_NUMBER + resp.COIN;
+
+// newmod
+cn2.innerHTML = resp.COIN;
+if(resp.COIN == "CLIENT"){
+cn2.innerHTML = resp.CLIENT;
+if(resp.CLIENT == "bci_progpowminer"){cn2.innerHTML = "bci_ppow";}
+if(resp.CLIENT == "bminer_15_5_1"){cn2.innerHTML = "bminer";}
+if(resp.CLIENT == "claymore_14_2"){cn2.innerHTML = "claymore";}
+if(resp.CLIENT == "claymore_12_0"){cn2.innerHTML = "claymore";}
+if(resp.CLIENT == "cryptodredge_0_19_1_c10"){cn2.innerHTML = "CD_19";}
+if(resp.CLIENT == "cryptodredge_0_18_0_c10"){cn2.innerHTML = "CD_18";}
+if(resp.CLIENT == "cryptodredge_v0_18_0_cuda_9_2"){cn2.innerHTML = "CD_18";}
+if(resp.CLIENT == "cryptodredge_v0_17_0_cuda_9_2"){cn2.innerHTML = "CD_17";}
+if(resp.CLIENT == "ethminer_0_17_1"){cn2.innerHTML = "ethminer";}
+if(resp.CLIENT == "gminer_1_42"){cn2.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_41"){cn2.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_40"){cn2.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_39"){cn2.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_38"){cn2.innerHTML = "gminer";}
+if(resp.CLIENT == "PhoenixMiner_4_2c"){cn2.innerHTML = "phoenix";}
+if(resp.CLIENT == "trex_0_14_4_c10"){cn2.innerHTML = "trex";}
+if(resp.CLIENT == "trex_0_10_2_c10"){cn2.innerHTML = "trex";}
+if(resp.CLIENT == "trex_0_9_2_c10"){cn2.innerHTML = "trex";}
+if(resp.CLIENT == "trex_0_9_2_c9"){cn2.innerHTML = "trex";}
+if(resp.CLIENT == "z_enemy_1_28"){cn2.innerHTML = "z_enemy";}
+if(resp.CLIENT == "z_enemy_2_0"){cn2.innerHTML = "z_enemy";}
+}
+
+cn2.className = "w";
+curg2.appendChild(cn2);
+
+
+if(base == number_of_groups){
+var mydelete = [];
+if(base % 2 == 1){mydelete[base] = document.createElement("codedelete");}
+if(base % 2 == 0){mydelete[base] = document.createElement("codedelete");}
+var updelete = mydelete[base];
+updelete.innerHTML = "delete";
+updelete.className = "v";
+updelete.style.opacity = 0.01;
+updelete.value = JSON.stringify(resp);
+updelete.id = "delete_group";
+updelete.addEventListener("click", function(e){var target = e.target || e.srcElement; delete_last_group(target,resp,form_data)}, false);
+curg2.appendChild(updelete);
+}
+}
+
+
+function addGroupZ(resp, cur, form_data){
+var divid = document.getElementById("GROUPS");
+var base = cur;
+
+if(cur === 0){while (divid.firstChild ){divid.removeChild(divid.firstChild);}}
+
+var grid_basis = document.createElement("gridBASIS");
+grid_basis.className = "grid-containerBASIS";
+if(basis == "" || basis == null){grid_basis.className = "grid-containerEMPTY_BASIS";}
+divid.appendChild(grid_basis);
+
+var grid_group = document.createElement("gridGROUP");
+grid_group.className = "grid-containerGROUP";
+divid.appendChild(grid_group);
+
+
+var plus_basis = document.createElement("codeL");
+function execute_basis(element)
+{
+var url = add_basis_url + session;
+window.location.href = url;
+}
+plus_basis.className = "z";
+plus_basis.setAttribute("id", "plus_basis");
+plus_basis.innerHTML = "BASIS";
+if(basis == "" || basis == null){plus_basis.innerHTML = "BASIS: START HERE!";}
+plus_basis.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_basis(target)}, false);
+grid_basis.appendChild(plus_basis);
+
+//var wall = document.createElement("div");
+//wall.id = "wallet_base";
+//wall.className = "z";
+//grid_basis.appendChild(wall);
+
+var one = document.createElement("codevv");
+one.innerHTML = "<br>";
+grid_basis.appendChild(one);
+
+
+var plus_group = document.createElement("codeL");
+function execute_plus_group(element)
+{
+if(number_of_groups < 5){
+var url = add_group_url + session;
+window.location.href = url;}
+}
+plus_group.className = "z";
+plus_group.setAttribute("id", "plus_group");
+plus_group.innerHTML = "+Group";
+plus_group.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_plus_group(target)}, false);
+grid_group.appendChild(plus_group);
+
+var fs = document.createElement("codeCH");
+fs.innerHTML = "H/s";
+fs.className = "y";
+grid_group.appendChild(fs);
+
+var rn = document.createElement("codeCH");
+rn.innerHTML = "GN";
+rn.className = "x";
+grid_group.appendChild(rn);
+
+var cn = document.createElement("codeCH");
+cn.innerHTML = "CL";
+cn.className = "w";
+cn.id = "group_coin_selector";
+grid_group.appendChild(cn);
+}
+
+
+function getUser(){
+var temp = {};
+var req = new XMLHttpRequest();
+var url = ov + "/user/" + uid;
+req.open( "GET", url, false );
+req.setRequestHeader('Authorization', auth);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = JSON.parse( req.responseText );
+basis = response['basis'];
+group1 = response['group1'];
+group2 = response['group2'];
+group3 = response['group3'];
+group4 = response['group4'];
+group5 = response['group5'];
+
+dev_flag = response['dev_flag'];
+if(group5 != ""  || group5 != null){number_of_groups = 5;}
+if(group5 == "" || group5 == null){number_of_groups = 4;}
+if(group4 == "" || group4 == null){number_of_groups = 3;}
+if(group3 == "" || group3 == null){number_of_groups = 2;}
+if(group2 == "" || group2 == null){number_of_groups = 1;}
+if(group1 == "" || group1 == null){number_of_groups = 0;}
+}
+else{console.log( "Error: " + req.statusText );}});
+req.send(null);
+}
+
+
+function getGroups(form_data){
+getUser();
+var i = 0;
+var resp = {};
+var z = number_of_groups;
+
+if(number_of_groups === 0){addGroupZ(basis,0,form_data);}
+if(number_of_groups > 0){
+for(i = 0; i < z; i++){
+
+if(i == 0){resp = group1;}
+if(i == 1){resp = group2;}
+if(i == 2){resp = group3;}
+if(i == 3){resp = group4;}
+if(i == 4){resp = group5;}
+
+addGroups(resp,i,form_data);
+}
+}
+}
+
+
+// implements group changes
+// assumes that group oc settings are always pushed to individual rigs if part of a group
+function group_changes_to_rigs(resp,i,form_data,numrigs){
+group_rig = {};
+group_rig_flag = 0;
+var group_oc_flag = 0;
+var group_var = {};
+var coin_flag = 0;
+if(dev_flag == 0)
+{
+if(resp.GROUP_NUMBER == 1 || resp.GROUP_NUMBER == 2 || resp.GROUP_NUMBER == 3 || resp.GROUP_NUMBER == 4 || resp.GROUP_NUMBER == 5)
+{
+if(group1 != "" || group1 != null){if(resp.GROUP_NUMBER == 1){group_var = JSON.parse(group1);}}
+if(group2 != "" || group2 != null){if(resp.GROUP_NUMBER == 2){group_var = JSON.parse(group2);}}
+if(group3 != "" || group3 != null){if(resp.GROUP_NUMBER == 3){group_var = JSON.parse(group3);}}
+if(group4 != "" || group4 != null){if(resp.GROUP_NUMBER == 4){group_var = JSON.parse(group4);}}
+if(group5 != "" || group5 != null){if(resp.GROUP_NUMBER == 5){group_var = JSON.parse(group5);}}
+if(resp.USE_GROUP_OC != group_var.USE_GROUP_OC){group_rig['USE_GROUP_OC'] = group_var.USE_GROUP_OC; group_rig_flag = 1;}
+// chere is this making every reload a change?
+if(group_var.USE_GROUP_OC == "YES"){group_oc_flag = 1;}
+if(resp.RVN_ADDRESS != group_var.RVN_ADDRESS){group_rig['RVN_ADDRESS'] = group_var.RVN_ADDRESS; group_rig_flag = 1;}
+if(resp.CLIENT != group_var.CLIENT){group_rig['CLIENT'] = group_var.CLIENT; group_rig_flag = 1;}
+if(resp.CLIENT_ARGS != group_var.CLIENT_ARGS){group_rig['CLIENT_ARGS'] = group_var.CLIENT_ARGS; group_rig_flag = 1;}
+if(resp.COIN != group_var.COIN){group_rig['COIN'] = group_var.COIN; group_rig_flag = 1; coin_flag = 1;}
+if(resp.CHATID != group_var.CHATID){group_rig['CHATID'] = group_var.CHATID; group_rig_flag = 1;}
+if(resp.APIKEY != group_var.APIKEY){group_rig['APIKEY'] = group_var.APIKEY; group_rig_flag = 1;}
+if(resp.RVN_POOL != group_var.RVN_POOL){group_rig['RVN_POOL'] = group_var.RVN_POOL; group_rig_flag = 1;}
+if(resp.NANOPOOL_EMAIL != group_var.NANOPOOL_EMAIL){group_rig['NANOPOOL_EMAIL'] = group_var.NANOPOOL_EMAIL; group_rig_flag = 1;}
+if(resp.EMAIL_UPDATES != group_var.EMAIL_UPDATES){group_rig['EMAIL_UPDATES'] = group_var.EMAIL_UPDATES; group_rig_flag = 1;}
+if(group_oc_flag == 1){
+if(resp.X16R_SPECIFIC_OC_SETTINGS != group_var.X16R_SPECIFIC_OC_SETTINGS){group_rig['X16R_SPECIFIC_OC_SETTINGS'] = group_var.X16R_SPECIFIC_OC_SETTINGS; group_rig_flag = 1;}
+if(resp.CLIENT_OC != group_var.CLIENT_OC){group_rig['CLIENT_OC'] = group_var.CLIENT_OC; group_rig_flag = 1;}
+}
+
+if(group_rig_flag == 1){
+
+group_rig['COIN'] = group_var.COIN;
+var outtext = "patching changes " + resp.RIG_NUMBER + " " + group_var.COIN;
+log_event(outtext);
+
+var self = resp.self;
+var payload = JSON.stringify(group_rig);
+
+var req = new XMLHttpRequest();
+var url = ov + self;
+req.open( "PATCH", url, true );
+req.setRequestHeader('Authorization', auth);
+req.setRequestHeader("Content-Type", "application/json");
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){var response = JSON.stringify(req.responseText);}
+else{console.log("Error: " + req.statusText);}});
+req.send(payload);
+
+// update dashboard
+var element_id = resp.RIG_NUMBER + 'coin';
+var push = document.getElementById(element_id);
+
+push.innerHTML = group_rig.COIN;
+// newmod
+if(group_rig.COIN == "CLIENT"){
+push.innerHTML = resp.CLIENT;
+if(resp.CLIENT == "bci_progpowminer"){push.innerHTML = "bci_ppow";}
+if(resp.CLIENT == "bminer_15_5_1"){push.innerHTML = "bminer";}
+if(resp.CLIENT == "claymore_14_2"){push.innerHTML = "claymore";}
+if(resp.CLIENT == "claymore_12_0"){push.innerHTML = "claymore";}
+if(resp.CLIENT == "cryptodredge_0_19_1_c10"){push.innerHTML = "CD_19";}
+if(resp.CLIENT == "cryptodredge_0_18_0_c10"){push.innerHTML = "CD_18";}
+if(resp.CLIENT == "cryptodredge_v0_18_0_cuda_9_2"){push.innerHTML = "CD_18";}
+if(resp.CLIENT == "cryptodredge_v0_17_0_cuda_9_2"){push.innerHTML = "CD_17";}
+if(resp.CLIENT == "ethminer_0_17_1"){push.innerHTML = "ethminer";}
+if(resp.CLIENT == "gminer_1_42"){push.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_41"){push.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_40"){push.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_39"){push.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_38"){push.innerHTML = "gminer";}
+if(resp.CLIENT == "PhoenixMiner_4_2c"){push.innerHTML = "phoenix";}
+if(resp.CLIENT == "trex_0_14_4_c10"){push.innerHTML = "trex";}
+if(resp.CLIENT == "trex_0_10_2_c10"){push.innerHTML = "trex";}
+if(resp.CLIENT == "trex_0_9_2_c10"){push.innerHTML = "trex";}
+if(resp.CLIENT == "trex_0_9_2_c9"){push.innerHTML = "trex";}
+if(resp.CLIENT == "z_enemy_1_28"){push.innerHTML = "z_enemy";}
+if(resp.CLIENT == "z_enemy_2_0"){push.innerHTML = "z_enemy";}
+}
+
+var element2_id = resp.RIG_NUMBER;
+var push2 = document.getElementById(element2_id);
+push2.innerHTML = resp.HASHRATE;
+if(resp.HASHRATE == NaN){push2.innerHTML = "0"}
+if(coin_flag == 1){push2.innerHTML = "0"}
+
+var currig = resp.RIG_NUMBER + 'oc';
+var push2 = document.getElementById(currig);
+if(group_rig.COIN == "RVN"){push2.innerHTML = resp.X16R_SPECIFIC_OC_SETTINGS}
+if(group_rig.COIN == "CLIENT"){push2.innerHTML = resp.CLIENT_OC}
+}
+}
+}
+} // function group_changes_to_rigs(resp,i,form_data,numrigs){
+
+
+// expand or contract pool lamda links
+function content_hide_show_toggle(element2){
+var element = document.getElementById("wallet");
+var rvn_wallet = document.getElementById("rvn_ref_link");
+
+var vis = "test";
+if(element != ""){
+if(rvn_wallet.style.display == "none"){
+vis = "";
+rvn_wallet.style.display = vis;
+wallet.style.display = vis;
+element.className = "codeOPEN_WALLET";
+}
+else{
+vis = "none";
+rvn_wallet.style.display = vis;
+wallet.style.display = vis;
+element.className = "codeWALLET";
+}
+}
+} // function content_hide_show_toggle(element2){
+
+
+
+// add rigs section
+function addDiv(resp, cur, form_data, numrigs){
+var divid = document.getElementById("RIGS");
+var base = cur + 1;
+
+if(cur === 0){while (divid.firstChild ){divid.removeChild(divid.firstChild);}}
+
+if(base == 1){
+var g1 = document.createElement("grid1");
+g1.className = "grid-container";
+divid.appendChild(g1);
+
+var curg = document.createElement("grid3");
+curg.className = "grid-container3";
+divid.appendChild(curg);
+
+var wallet = document.getElementById("wallet");
+
+
+
+var plus = document.createElement("codeL");
+function execute_plus_rig(element)
+{
+var rn = numrigs + 1;
+var url = add_rig_url + session + "_" + rn;
+window.location.href = url;
+}
+plus.className = "a";
+plus.setAttribute("id", "plus_rig");
+plus.innerHTML = "+Rig";
+plus.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_plus_rig(target)}, false);
+curg.appendChild(plus);
+
+
+var basis_json = {};
+if(basis != ""){basis_json = JSON.parse(basis);}
+
+var rvn = document.createElement("codeRVN");  //codeRVN
+function execute_minermoreRVN(element)
+{
+var url = "https://rvn.nanopool.org/account/" + basis_json['RVN_ADDRESS'];
+window.open(url);
+}
+rvn.style.display = "none";
+rvn.innerHTML = basis_json['RVN_ADDRESS'];
+rvn.id = "rvn_ref_link";
+rvn.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_minermoreRVN(target)}, false);
+wallet.appendChild(rvn);
+
+var fs = document.createElement("codeCH");
+fs.innerHTML = "H/s";
+fs.className = "b";
+curg.appendChild(fs);
+
+var rn = document.createElement("codeCH");
+rn.innerHTML = "RN";
+rn.className = "c";
+curg.appendChild(rn);
+
+var cn = document.createElement("codeCH");
+cn.innerHTML = "CL";
+cn.className = "d";
+cn.id = "coin_selector";
+curg.appendChild(cn);
+
+var gn = document.createElement("codeCH");
+gn.innerHTML = "GN";
+gn.className = "e";
+curg.appendChild(gn);
+
+var rb = document.createElement("codeCH");
+rb.innerHTML = "RB";
+rb.className = "k";
+curg.appendChild(rb);
+
+var fs = document.createElement("codeCH");
+fs.innerHTML = "DL";
+fs.className = "l";
+curg.appendChild(fs);
+
+var cup = document.createElement("codeCH");
+cup.innerHTML = "RC";
+cup.className = "mm";
+curg.appendChild(cup);
+
+var enable = document.createElement("codeL");
+function execute_enable_delete(element)
+{
+var element2 = document.getElementById("delete");
+var vis = 0.5;
+if(element2 != ""){
+if(element2.style.opacity == 0.01){
+vis = 1.0;
+element2.style.opacity = vis;
+delete_rig = 1;
+element.innerHTML = "lock";
+}
+else{
+vis = 0.01;
+element2.style.opacity = vis;
+delete_rig = 0;
+element.innerHTML = "delete";
+}
+}
+}
+enable.innerHTML = "delete";
+enable.className = "n";
+enable.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_enable_delete(target)}, false);
+curg.appendChild(enable);
+
+var con = document.createElement("codeCH");
+con.innerHTML = "CS";
+con.className = "o";
+curg.appendChild(con);
+}
+
+var mydivs = [];
+mydivs[base] = document.createElement("grid2");
+var curg2 = mydivs[base];
+curg2.className = "grid-container2";
+divid.appendChild(curg2);
+
+
+var myedits = [];
+myedits[base] = document.createElement("codeL");
+var edits = myedits[base];
+function execute_edit_rig(element)
+{
+var toString = cur;
+var url = edit_rig_url + session + "_" + toString;
+window.location.href = url;
+}
+edits.className = "a";
+edits.innerHTML = "Edit";
+edits.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_edit_rig(target)}, false);
+curg2.appendChild(edits);
+
+
+var mych2 = [];
+if(base % 2 == 1){mych2[base] = document.createElement("code2");}
+if(base % 2 == 0){mych2[base] = document.createElement("code4");}
+var ch2 = mych2[base];
+ch2.id = resp.RIG_NUMBER;
+ch2.innerHTML = resp.HASHRATE;
+ch2.className = "b";
+curg2.appendChild(ch2);
+
+var myrn = [];
+if(base % 2 == 1){myrn[base] = document.createElement("code2");}
+if(base % 2 == 0){myrn[base] = document.createElement("code4");}
+var rn2 = myrn[base];
+rn2.innerHTML = resp.RIG_NUMBER;
+rn2.className = "c";
+curg2.appendChild(rn2);
+
+var mycn2 = [];
+if(base % 2 == 1){mycn2[base] = document.createElement("code2");}
+if(base % 2 == 0){mycn2[base] = document.createElement("code4");}
+var cn2 = mycn2[base];
+cn2.id = resp.RIG_NUMBER + 'coin';
+cn2.innerHTML = resp.COIN;
+
+// newmod
+if(resp.COIN == "CLIENT"){
+cn2.innerHTML = resp.CLIENT;
+if(resp.CLIENT == "bci_progpowminer"){cn2.innerHTML = "bci_ppow";}
+if(resp.CLIENT == "bminer_15_5_1"){cn2.innerHTML = "bminer";}
+if(resp.CLIENT == "claymore_14_2"){cn2.innerHTML = "claymore";}
+if(resp.CLIENT == "claymore_12_0"){cn2.innerHTML = "claymore";}
+if(resp.CLIENT == "cryptodredge_0_19_1_c10"){cn2.innerHTML = "CD_19";}
+if(resp.CLIENT == "cryptodredge_0_18_0_c10"){cn2.innerHTML = "CD_18";}
+if(resp.CLIENT == "cryptodredge_v0_18_0_cuda_9_2"){cn2.innerHTML = "CD_18";}
+if(resp.CLIENT == "cryptodredge_v0_17_0_cuda_9_2"){cn2.innerHTML = "CD_17";}
+if(resp.CLIENT == "ethminer_0_17_1"){cn2.innerHTML = "ethminer";}
+if(resp.CLIENT == "gminer_1_42"){cn2.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_41"){cn2.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_40"){cn2.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_39"){cn2.innerHTML = "gminer";}
+if(resp.CLIENT == "gminer_1_38"){cn2.innerHTML = "gminer";}
+if(resp.CLIENT == "PhoenixMiner_4_2c"){cn2.innerHTML = "phoenix";}
+if(resp.CLIENT == "trex_0_14_4_c10"){cn2.innerHTML = "trex";}
+if(resp.CLIENT == "trex_0_10_2_c10"){cn2.innerHTML = "trex";}
+if(resp.CLIENT == "trex_0_9_2_c10"){cn2.innerHTML = "trex";}
+if(resp.CLIENT == "trex_0_9_2_c9"){cn2.innerHTML = "trex";}
+if(resp.CLIENT == "z_enemy_1_28"){cn2.innerHTML = "z_enemy";}
+if(resp.CLIENT == "z_enemy_2_0"){cn2.innerHTML = "z_enemy";}
+}
+
+
+
+cn2.className = "d";
+curg2.appendChild(cn2);
+
+var mygn = [];
+if(base % 2 == 1){mygn[base] = document.createElement("code2");}
+if(base % 2 == 0){mygn[base] = document.createElement("code4");}
+var gn2 = mygn[base];
+gn2.id = resp.RIG_NUMBER + 'gn';
+gn2.innerHTML = resp.GROUP_NUMBER;
+gn2.className = "e";
+curg2.appendChild(gn2);
+
+
+var myrb2 = [];
+if(base % 2 == 1){myrb2[base] = document.createElement("codebc");}
+if(base % 2 == 0){myrb2[base] = document.createElement("codebc");}
+var rb2 = myrb2[base];
+rb2.innerHTML = "reboot";
+rb2.className = "k";
+rb2.value = JSON.stringify(resp);
+rb2.addEventListener("click", function(e){var target = e.target || e.srcElement; send_reboot(target)}, false);
+curg2.appendChild(rb2);
+
+
+var my1b = [];
+if(base % 2 == 1){my1b[base] = document.createElement("codedl");}
+if(base % 2 == 0){my1b[base] = document.createElement("codedl");}
+var b12 = my1b[base];
+var output_0rig = {};
+output_0rig['USER_ID'] = resp.USER_ID;
+output_0rig['RIG_NUMBER'] = resp.RIG_NUMBER;
+output_0rig['CUSTOMER_KEY'] = ckey;
+output_0rig['OV'] = ov;
+var outbash = JSON.stringify(output_0rig);
+var filename = '0rig__' + resp.RIG_NUMBER + '__.txt';
+b12.addEventListener("click", function(e){var target = e.target || e.srcElement; download(outbash, filename, 'text/plain')}, false);  //'plain;charset=utf-8'
+b12.innerHTML = "0rig";
+b12.className = "l";
+curg2.appendChild(b12);
+
+var my1up = [];
+if(base % 2 == 1){my1up[base] = document.createElement("codedl");}
+if(base % 2 == 0){my1up[base] = document.createElement("codedl");}
+var up12 = my1up[base];
+up12.innerHTML = "reclient";
+up12.className = "m";
+up12.value = JSON.stringify(resp);
+up12.id = resp.RIG_NUMBER + 'up';
+up12.addEventListener("click", function(e){var target = e.target || e.srcElement; re2unix(target)}, false);
+curg2.appendChild(up12);
+
+
+if(base == numrigs){
+var mydelete = [];
+if(base % 2 == 1){mydelete[base] = document.createElement("codedelete");}
+if(base % 2 == 0){mydelete[base] = document.createElement("codedelete");}
+var updelete = mydelete[base];
+updelete.innerHTML = "delete";
+updelete.id = "delete";
+updelete.className = "n";
+updelete.style.opacity = 0.01;
+updelete.value = JSON.stringify(resp);
+updelete.addEventListener("click", function(e){var target = e.target || e.srcElement; delete_last(target,resp,form_data)}, false);
+curg2.appendChild(updelete);
+}
+
+
+var my1cs = [];
+if(base % 2 == 1){my1cs[base] = document.createElement("codedl");}
+if(base % 2 == 0){my1cs[base] = document.createElement("codedl");}
+var cs12 = my1cs[base];
+cs12.innerHTML = "console";
+cs12.className = "o";
+cs12.value = JSON.stringify(resp);
+cs12.id = resp.RIG_NUMBER + 'cs';
+cs12.addEventListener("click", function(e){var target = e.target || e.srcElement; view_console(target)}, false);
+curg2.appendChild(cs12);
+} // function addDiv(resp, cur, form_data, numrigs){
+
+
+function addDivZ(resp, cur, form_data){
+var divid = document.getElementById("RIGS");
+var base = cur;
+while (divid.firstChild ){divid.removeChild(divid.firstChild);}
+
+var g1 = document.createElement("grid1");
+g1.className = "grid-container";
+divid.appendChild(g1);
+
+
+var curg = document.createElement("grid3");
+curg.className = "grid-container3";
+divid.appendChild(curg);
+
+
+var plus = document.createElement("codeL");
+function execute_plus_rig(element)
+{
+var rn = base + 1;
+var url = add_rig_url + session + "_" + rn;
+window.location.href = url;
+}
+plus.className = "a";
+plus.setAttribute("id", "plus_rig");
+plus.innerHTML = "+Rig";
+plus.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_plus_rig(target)}, false);
+curg.appendChild(plus);
+
+
+var basis_json = {};
+if(basis != ""){basis_json = JSON.parse(basis);}
+
+var rvn = document.createElement("codeRVN");  //codeRVN
+function execute_minermoreRVN(element)
+{
+var url = "https://rvn.nanopool.org/account/" + basis_json['RVN_ADDRESS'];
+window.open(url);
+}
+rvn.style.display = "none";
+rvn.innerHTML = basis_json['RVN_ADDRESS'];
+rvn.id = "rvn_ref_link";
+rvn.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_minermoreRVN(target)}, false);
+wallet.appendChild(rvn);
+
+var fs = document.createElement("codeCH");
+fs.innerHTML = "H/s";
+fs.className = "b";
+curg.appendChild(fs);
+
+var rn = document.createElement("codeCH");
+rn.innerHTML = "RN";
+rn.className = "c";
+curg.appendChild(rn);
+
+var cn = document.createElement("codeCH");
+cn.innerHTML = "CL";
+cn.className = "d";
+curg.appendChild(cn);
+
+var gn = document.createElement("codeCH");
+gn.innerHTML = "GN";
+gn.className = "e";
+curg.appendChild(gn);
+
+var rb = document.createElement("codeCH");
+rb.innerHTML = "RB";
+rb.className = "k";
+curg.appendChild(rb);
+
+var fs = document.createElement("codeCH");
+fs.innerHTML = "DL";
+fs.className = "l";
+curg.appendChild(fs);
+
+var cup = document.createElement("codeCH");
+cup.innerHTML = "RC";
+cup.className = "mm";
+curg.appendChild(cup);
+
+var con = document.createElement("codeCH");
+con.innerHTML = "CS";
+con.className = "o";
+curg.appendChild(con);
+} // function addDivZ(resp, cur, form_data){
+
+function getRigs(form_data){
+var req = new XMLHttpRequest();
+var url = ov + "/user/" + uid + "/rigs";
+req.open("GET", url, false);
+req.setRequestHeader('Authorization', auth);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var i = 0;
+var response = JSON.parse(req.responseText);
+var numrigs = response.length;
+number_of_rigs = numrigs;
+if( numrigs === 0){addDivZ(response,0,form_data);}
+for (i = 0; i < response.length; i++){
+var num = response[i];
+var req2 = new XMLHttpRequest();
+var rig_url = ov + num;
+req2.open("GET", rig_url, false);
+req2.setRequestHeader('Authorization', auth);
+req2.addEventListener( "load",function(){
+if( req2.status >= 200 && req2.status < 403 ){
+var resp2 = JSON.parse(req2.responseText);
+addDiv(resp2,i,form_data,numrigs);
+
+group_changes_to_rigs(resp2,i,form_data,numrigs);
+}else{console.log( "Error: " + req2.statusText );}});req2.send( null );}
+}else{console.log( "Error: " + req.statusText );}});req.send( null );
+} // function getRigs(form_data){
+
+</script>
+</body>
+</html>
