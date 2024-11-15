@@ -89,23 +89,18 @@ ddiv{}
 <div class="grid-container" id="main">
 <div class="u2"><signup id="signup">Signup</signup>&nbsp&nbsp<login id="login">Login</login></div>
 <div class="v"></div>
-<div class="t">oros mining OS supports mining:</div>
 <div class="l"><div id="base"></div></div>
 <div class="ll" id="linkinfo"></div>
 </div>
 <div class="grid-container1" id="main2">
 <div class="w"></div>
 <div class="a"></div>
-<div class="i2">with:</div>
-<div class="x"><thousand_series>Nvidia GPUs</thousand_series></div>
-<div class="d">fee:</div>
-<div class="z">0.05%</div>
-<div class="g">0.05% is 432 seconds of each day</div>
-<div class="n">Configure, edit, and monitor rigs.</div>
 </div>
 </ddiv>
 <footer class="footer"></footer>
+<!--
 <script src="https://hartmanm.github.io/ov/config.js"></script>
+-->
 <script>
 const ov = 'https://hartmanm.github.io/ov';
 var base = document.getElementById("base");
@@ -121,10 +116,7 @@ var lamdalink = document.getElementById(id);
 lamdalink.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_z(target,url)}, false);
 }
 
-lamda_link('<img src="'+eth_img+'" style="width:50px;height:50px;" />','eth','https://www.ethereum.org');
-lamda_link('<img src="'+etc_img+'" style="width:50px;height:50px;" />','rvn','https://ravencoin.org');
-lamda_link('<img src="'+rvn_img+'" style="width:50px;height:50px;" />','etc','https://ethereumclassic.org');
-lamda_link('<img src="'+xmr_img+'" style="width:50px;height:50px;" />','xmr','https://www.getmonero.org');
+// lamda_link('<img src="'+img_src+'" style="width:50px;height:50px;" />','abc','link_addr');
 
 function execute_signup(element)
 {
