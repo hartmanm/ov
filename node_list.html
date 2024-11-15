@@ -163,7 +163,6 @@ padding-top: 1vw;
 <nav_link class="nav_link" id="logout"></nav_link><nav_link class="nav_link" id="setup_guide">Setup Guide</nav_link>
 -->
 <nav_link class="nav_link" id="logout"></nav_link>
-<nav_link class="nav_link" id="changelog">Changelog</nav_link>
 <nav_link class="nav_link" id="log_ex_cl">LOG</nav_link>
 </nav>
 <div class="section">
@@ -317,14 +316,6 @@ function innerback(){e.innerHTML = "reclient";}
 var timer = setInterval(innerback, 60000);
 }
 }
-
-function execute_changelog(element)
-{
-var url = ov + "/changelog"
-window.open(url);
-}
-var home_href = document.getElementById('changelog');
-home_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_changelog(target)}, false);
 
 function get_auth()
 {
@@ -536,7 +527,7 @@ submit_form();  // init on load
 function execute_logout(element)
 {
 //var url = ov + "/logout/" + session;
-var url = ov + "/logout.html;
+var url = ov + "/logout.html";
 window.location.href = url;
 }
 var home_href = document.getElementById('logout');
