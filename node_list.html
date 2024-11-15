@@ -55,12 +55,6 @@ codeRVNa{border-radius: 2px; font-size: 115%; color: #F0D7FE; background-color: 
 codeNICE{border-radius: 2px; font-size: 115%; color: #8e7f02; background-color: #f7f5b8; text-decoration: none;}
 codeNICE:hover,codeNICE:active,codeNICE:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
 codeNICEa{border-radius: 2px; font-size: 115%; color: #F0D7FE; background-color: #c7ae9b; text-decoration: none;}
-codeANON{border-radius: 2px; font-size: 115%; color: #c7254e; background-color: #f9f2f4; text-decoration: none;}
-codeANON:hover,codeANON:active,codeANON:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
-codeAION{border-radius: 2px; font-size: 115%; color: #152569; background-color: #85c8e8; text-decoration: none;}
-codeAION:hover,codeANON:active,codeANON:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
-codeBTG{border-radius: 2px; font-size: 115%; color: #152569; background-color: #a1b0f7; text-decoration: none;}
-codeBTG:hover,codeBTG:active,codeBTG:focus {color: #CFD0D1; background-color: #12192A; ;cursor: pointer;outline: 0; text-decoration: none}
 
 .btg{color: #152569; background-color: #a1b0f7;}
 .aion{color: #152569; background-color: #85c8e8;}
@@ -101,84 +95,6 @@ justify-items: left;
 }
 .a_etc {grid-column: 1;}
 .b_eth {grid-column: 2;}
-
-.wallet_base{
-display: grid;
-align: center;
-grid-template-columns: 2.75vw;
-grid-auto-columns: 2.75vw;
-column-gap: 5.75vw;
-padding-top: 1vw;
-padding-bottom: 1vw;
-max-width:450px;
-justify-items: left;
-}
-.zz{grid-column: 1;}
-.codeWALLET{grid-column: 2;}
-
-.grid-containerEMPTY_BASIS{
-display: grid;
-align: center;
-grid-template-columns: 2.75vw;
-grid-auto-columns: 2.75vw;
-column-gap: 5.75vw;
-max-width:450px;
-justify-items: center;
-padding-bottom: 1vw;
-padding-top: 1vw;
-}
-.zz{grid-column: 1;}
-.z {grid-column: 2;}
-
-.grid-containerBASIS{
-display: grid; align: center;
-grid-template-columns: 2.75vw;
-grid-auto-columns: 2.75vw;
-column-gap: 5.75vw;
-max-width:450px;
-justify-items: center;
-padding-bottom: 1vw;
-padding-top: 1vw;
-}
-.zz{grid-column: 1;}
-.z {grid-column: 2;}
-
-.grid-containerGROUP{
-display: grid; align: center;
-grid-template-columns: 2.75vw;
-grid-auto-columns: 2.75vw;
-column-gap: 5.75vw;
-max-width:40vw;
-justify-items: center;
-padding-bottom: 1vw;
-padding-top: 1vw;
-}
-.zz{grid-column: 1;}
-.z {grid-column: 2;}
-.y {grid-column: 3;}
-.x {grid-column: 4;}
-.w {grid-column: 5;}
-.v {grid-column: 6;}
-
-.grid-containerGROUPS{
-display: grid;
-align: center;
-border: 1px solid #ccc;
-grid-template-columns: 2.75vw;
-grid-auto-columns: 2.75vw;
-column-gap: 5.75vw;
-max-width:40vw;
-justify-items: center;
-padding-bottom: 1vw;
-padding-top: 1vw;
-}
-.zz{grid-column: 1;}
-.z {grid-column: 2;}
-.y {grid-column: 3;}
-.x {grid-column: 4;}
-.w {grid-column: 5;}
-.v {grid-column: 6;}
-.grid-containerGROUPS:nth-child(even){background-color: #E8E8E8; max-width:40vw;}
 
 .grid-container3{
 display: grid;
@@ -256,7 +172,7 @@ padding-top: 1vw;
 <br>
 <div id="droplist"></div>
 <div id="console" class="console"></div>
-<div id="RIGS"></div>
+<div id="NODES"></div>
 </div>
 </div>
 <br><br><br><br><br><br>
@@ -287,12 +203,11 @@ var log_count = 0;
 var number_of_rigs = 0;
 var start_hours = 0;
 var start_minutes = 0;
-var currentRIG_LOG=0;
+var currentNODE_LOG=0;
 var logged_in="0";
 var last_edit=0;
 var cur_edit=1;
 var update_flag=0;
-
 
 // is called in main // test then add with conditional in reload.  // retest
 function Fis_logged_in(){
@@ -353,17 +268,17 @@ function view_console(e)
 var element = e.value;
 var resp = JSON.parse(element);
 var self = resp.self;
-var rignum = parseInt(resp.RIG_NUMBER);
+var rignum = parseInt(resp.NODE_NUMBER);
 var cs = document.getElementById("console");
-if(currentRIG_LOG==rignum){cs.innerHTML = "";currentRIG_LOG=0;}
+if(currentNODE_LOG==rignum){cs.innerHTML = "";currentNODE_LOG=0;}
 else{
 var oc;
 if(resp.COIN == "CLIENT"){oc = resp.CLIENT_OC}
 // newmod
-cs.innerHTML="Rig " + rignum + "<br>" + "Private IP: " + resp.RIG_IP + "     Public IP: " + resp.PUBLIC_IP + "     MAC Address: " + resp.RIG_MAC + "<br>" + "OC: " + oc + "<br>" + "GPUs: " + resp.NUMBER_OF_GPUS + "<br><br>" + resp.RIG_LOG;
+cs.innerHTML="Rig " + rignum + "<br>" + "Private IP: " + resp.NODE_IP + "     Public IP: " + resp.PUBLIC_IP + "     MAC Address: " + resp.NODE_MAC + "<br>" + "OC: " + oc + "<br>" + "GPUs: " + resp.NUMBER_OF_GPUS + "<br><br>" + resp.NODE_LOG;
 var outtext = "output rig: " + rignum + " to console log";
 log_event(outtext);
-currentRIG_LOG=rignum;
+currentNODE_LOG=rignum;
 }
 }
 
@@ -374,10 +289,10 @@ var element = e.value;
 e.innerHTML = "..";
 var resp = JSON.parse(element);
 var self = resp.self;
-var rignum = parseInt(resp.RIG_NUMBER);
-var go_up = resp.RIG_NUMBER + 'up';
+var rignum = parseInt(resp.NODE_NUMBER);
+var go_up = resp.NODE_NUMBER + 'up';
 var up = document.getElementById(go_up);
-var rignum = parseInt(resp.RIG_NUMBER);
+var rignum = parseInt(resp.NODE_NUMBER);
 var payload = resp;
 var temp = {};
 temp['self'] = self;
@@ -409,7 +324,6 @@ window.open(url);
 var home_href = document.getElementById('changelog');
 home_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_changelog(target)}, false);
 
-
 function get_auth()
 {
 var newURL = window.location.toString();
@@ -430,7 +344,6 @@ auth = response;
 });req.send( null );
 }
 get_auth();
-
 
 function get_uid()
 {
@@ -454,7 +367,6 @@ uid = response;
 }
 get_uid();
 
-
 function get_ckey(){
 var url = ov + "/sid_ckey/" + session;
 var req = new XMLHttpRequest();
@@ -470,7 +382,6 @@ ckey = response;
 });req.send( null );
 }
 get_ckey();
-
 
 function log_eorc(){
 var element = document.getElementById("log");
@@ -573,7 +484,6 @@ var d = new Date();
 var minutes = d.getMinutes();
 return minutes;
 }
-
 
 // primary function
 var submit_form = function submit_form(event){
@@ -680,20 +590,19 @@ var target_rig = document.getElementById(i+1);
 var the_rig_number = i+1;
 target_rig.innerHTML = resp2.HASHRATE;
 
-// update rig RIG_LOG
+// update rig NODE_LOG
 var con = document.getElementById("console");
-var rignum = parseInt(resp2.RIG_NUMBER);
-if(currentRIG_LOG == rignum){
+var rignum = parseInt(resp2.NODE_NUMBER);
+if(currentNODE_LOG == rignum){
 var oc;
 if(resp2.COIN == "RVN"){oc = resp2.X16R_SPECIFIC_OC_SETTINGS}
 if(resp2.COIN == "CLIENT"){oc = resp2.CLIENT_OC}
 // newmod
-con.innerHTML="Rig " + rignum + "<br>" + "Private IP: " + resp2.RIG_IP + "     Public IP: " + resp2.PUBLIC_IP + "     MAC Address: " + resp2.RIG_MAC + "<br>" + "OC: " + oc + "<br>" + "GPUs: " + resp2.NUMBER_OF_GPUS + "<br><br>" + resp2.RIG_LOG;
+con.innerHTML="Rig " + rignum + "<br>" + "Private IP: " + resp2.NODE_IP + "     Public IP: " + resp2.PUBLIC_IP + "     MAC Address: " + resp2.NODE_MAC + "<br>" + "OC: " + oc + "<br>" + "GPUs: " + resp2.NUMBER_OF_GPUS + "<br><br>" + resp2.NODE_LOG;
 }
 
-
-// update all RIG_LOGs
-var tar=resp2.RIG_NUMBER + 'cs';
+// update all NODE_LOGs
+var tar=resp2.NODE_NUMBER + 'cs';
 var con = document.getElementById(tar);
 con.value = JSON.stringify(resp2);
 
@@ -756,7 +665,6 @@ resp = resp2;
 }
 }
 
-
 function download(content, fileName, contentType) {
 var a = document.createElement("a");
 var file = new Blob([content], {type: contentType});
@@ -764,7 +672,6 @@ a.href = URL.createObjectURL(file);
 a.download = fileName;
 a.click();
 }
-
 
 function renull_reboot(){
 var rignum = rn.shift();
@@ -802,7 +709,7 @@ var element = e.value;
 e.innerHTML = "..";
 var resp = JSON.parse(element);
 var self = resp.self;
-var rignum = parseInt(resp.RIG_NUMBER);
+var rignum = parseInt(resp.NODE_NUMBER);
 var payload = resp;
 var temp = {};
 temp['self'] = self;
@@ -840,7 +747,7 @@ var element = target.value;
 target.innerHTML = "..";
 var resp = JSON.parse(element);
 var self = resp.self;
-var rignum = parseInt(resp.RIG_NUMBER);
+var rignum = parseInt(resp.NODE_NUMBER);
 var payload = resp;
 var temp = {};
 // rig
@@ -885,33 +792,9 @@ else{console.log( "Error: " + req.statusText );}});
 req.send(null);
 }
 
-// expand or contract pool lamda links
-function content_hide_show_toggle(element2){
-var element = document.getElementById("wallet");
-var rvn_wallet = document.getElementById("rvn_ref_link");
-
-var vis = "test";
-if(element != ""){
-if(rvn_wallet.style.display == "none"){
-vis = "";
-rvn_wallet.style.display = vis;
-wallet.style.display = vis;
-element.className = "codeOPEN_WALLET";
-}
-else{
-vis = "none";
-rvn_wallet.style.display = vis;
-wallet.style.display = vis;
-element.className = "codeWALLET";
-}
-}
-} // function content_hide_show_toggle(element2){
-
-
-
 // add rigs section
 function addDiv(resp, cur, form_data, numrigs){
-var divid = document.getElementById("RIGS");
+var divid = document.getElementById("NODES");
 var base = cur + 1;
 
 if(cur === 0){while (divid.firstChild ){divid.removeChild(divid.firstChild);}}
@@ -924,10 +807,6 @@ divid.appendChild(g1);
 var curg = document.createElement("grid3");
 curg.className = "grid-container3";
 divid.appendChild(curg);
-
-var wallet = document.getElementById("wallet");
-
-
 
 var plus = document.createElement("codeL");
 function execute_plus_rig(element)
@@ -1028,7 +907,7 @@ var mych2 = [];
 if(base % 2 == 1){mych2[base] = document.createElement("code2");}
 if(base % 2 == 0){mych2[base] = document.createElement("code4");}
 var ch2 = mych2[base];
-ch2.id = resp.RIG_NUMBER;
+ch2.id = resp.NODE_NUMBER;
 ch2.innerHTML = resp.HASHRATE;
 ch2.className = "b";
 curg2.appendChild(ch2);
@@ -1037,7 +916,7 @@ var myrn = [];
 if(base % 2 == 1){myrn[base] = document.createElement("code2");}
 if(base % 2 == 0){myrn[base] = document.createElement("code4");}
 var rn2 = myrn[base];
-rn2.innerHTML = resp.RIG_NUMBER;
+rn2.innerHTML = resp.NODE_NUMBER;
 rn2.className = "c";
 curg2.appendChild(rn2);
 
@@ -1045,7 +924,7 @@ var mycn2 = [];
 if(base % 2 == 1){mycn2[base] = document.createElement("code2");}
 if(base % 2 == 0){mycn2[base] = document.createElement("code4");}
 var cn2 = mycn2[base];
-cn2.id = resp.RIG_NUMBER + 'coin';
+cn2.id = resp.NODE_NUMBER + 'coin';
 cn2.innerHTML = resp.COIN;
 
 // newmod
@@ -1062,7 +941,7 @@ var mygn = [];
 if(base % 2 == 1){mygn[base] = document.createElement("code2");}
 if(base % 2 == 0){mygn[base] = document.createElement("code4");}
 var gn2 = mygn[base];
-gn2.id = resp.RIG_NUMBER + 'gn';
+gn2.id = resp.NODE_NUMBER + 'gn';
 gn2.innerHTML = resp.GROUP_NUMBER;
 gn2.className = "e";
 curg2.appendChild(gn2);
@@ -1085,11 +964,11 @@ if(base % 2 == 0){my1b[base] = document.createElement("codedl");}
 var b12 = my1b[base];
 var output_0rig = {};
 output_0rig['USER_ID'] = resp.USER_ID;
-output_0rig['RIG_NUMBER'] = resp.RIG_NUMBER;
+output_0rig['NODE_NUMBER'] = resp.NODE_NUMBER;
 output_0rig['CUSTOMER_KEY'] = ckey;
 output_0rig['OV'] = ov;
 var outbash = JSON.stringify(output_0rig);
-var filename = '0rig__' + resp.RIG_NUMBER + '__.txt';
+var filename = '0rig__' + resp.NODE_NUMBER + '__.txt';
 b12.addEventListener("click", function(e){var target = e.target || e.srcElement; download(outbash, filename, 'text/plain')}, false);  //'plain;charset=utf-8'
 b12.innerHTML = "0rig";
 b12.className = "l";
@@ -1102,7 +981,7 @@ var up12 = my1up[base];
 up12.innerHTML = "reclient";
 up12.className = "m";
 up12.value = JSON.stringify(resp);
-up12.id = resp.RIG_NUMBER + 'up';
+up12.id = resp.NODE_NUMBER + 'up';
 up12.addEventListener("click", function(e){var target = e.target || e.srcElement; re2unix(target)}, false);
 curg2.appendChild(up12);
 
@@ -1129,14 +1008,14 @@ var cs12 = my1cs[base];
 cs12.innerHTML = "console";
 cs12.className = "o";
 cs12.value = JSON.stringify(resp);
-cs12.id = resp.RIG_NUMBER + 'cs';
+cs12.id = resp.NODE_NUMBER + 'cs';
 cs12.addEventListener("click", function(e){var target = e.target || e.srcElement; view_console(target)}, false);
 curg2.appendChild(cs12);
 } // function addDiv(resp, cur, form_data, numrigs){
 
 
 function addDivZ(resp, cur, form_data){
-var divid = document.getElementById("RIGS");
+var divid = document.getElementById("NODES");
 var base = cur;
 while (divid.firstChild ){divid.removeChild(divid.firstChild);}
 
