@@ -247,18 +247,14 @@ padding-top: 1vw;
 <nav_link class="nav_link" id="logout"></nav_link><nav_link class="nav_link" id="setup_guide">Setup Guide</nav_link>
 -->
 <nav_link class="nav_link" id="logout"></nav_link>
-<nav_link class="nav_link" id="downloadoros"></nav_link><nav_link class="nav_link" id="faq">FAQ</nav_link>
 <nav_link class="nav_link" id="changelog">Changelog</nav_link>
 <nav_link class="nav_link" id="log_ex_cl">LOG</nav_link>
-<nav_link class="nav_link" id="wallet_ex_cl">Pool Links</nav_link>
 </nav>
 <div class="section">
 <br><br><br><br>
 <div id="log"></div>
 <br>
 <div id="droplist"></div>
-<div id="wallet" class="wallet_base"></div>
-<div id="GROUPS"></div>
 <div id="console" class="console"></div>
 <div id="RIGS"></div>
 </div>
@@ -268,13 +264,8 @@ padding-top: 1vw;
 <script>
 'use strict';
 const ov = 'https://hartmanm.github.io/ov';
-var add_basis_url = "https://hartmanm.github.io/ov/basis/";
-var add_group_url = "https://hartmanm.github.io/ov/addgroup/";
-var edit_group_url = "https://hartmanm.github.io/ov/editgroup/";
-var add_rig_url = "https://hartmanm.github.io/ov/addrig/";
-var edit_rig_url = "https://hartmanm.github.io/ov/editrig/";
 
-var profibility_url = "";
+var add_rig_url = "https://hartmanm.github.io/ov/addrig/";
 
 var log = 0;
 var dev_flag = "";
@@ -285,24 +276,11 @@ var ckey = "";
 var session = "";
 var data_box = "";
 var droplist = [];
-var number_of_groups = 0;
-var group1_hashrate = 0;
-var group2_hashrate = 0;
-var group3_hashrate = 0;
-var group4_hashrate = 0;
-var group5_hashrate = 0;
-var basis = {};
-var group1 = {};
-var group2 = {};
-var group3 = {};
-var group4 = {};
-var group5 = {};
-var group_rig = {};
-var group_rig_flag = 0;
+
 var average_cycle = [];
 var timeout = [];
 var delete_rig = 0;
-var delete_group = 0;
+
 var reload_number = 0;
 var lognodes = [];
 var log_count = 0;
@@ -344,7 +322,6 @@ console.log("logged_in: "+logged_in);
 });req.send( null );
 }
 
-
 // is called in getGroups and getRigs  // retest
 function Fis_last_edit(){
 var url = ov + "/last_edit/" + uid;
@@ -371,7 +348,6 @@ console.log("last_edit: "+last_edit);
 });req.send( null );
 }
 
-
 function view_console(e)
 {
 var element = e.value;
@@ -382,7 +358,6 @@ var cs = document.getElementById("console");
 if(currentRIG_LOG==rignum){cs.innerHTML = "";currentRIG_LOG=0;}
 else{
 var oc;
-if(resp.COIN == "RVN"){oc = resp.X16R_SPECIFIC_OC_SETTINGS}
 if(resp.COIN == "CLIENT"){oc = resp.CLIENT_OC}
 // newmod
 cs.innerHTML="Rig " + rignum + "<br>" + "Private IP: " + resp.RIG_IP + "     Public IP: " + resp.PUBLIC_IP + "     MAC Address: " + resp.RIG_MAC + "<br>" + "OC: " + oc + "<br>" + "GPUs: " + resp.NUMBER_OF_GPUS + "<br><br>" + resp.RIG_LOG;
@@ -426,34 +401,6 @@ var timer = setInterval(innerback, 60000);
 }
 }
 
-function downloadoros(content, fileName, contentType)
-{
-var d_id = "ag1wfm92ZXJsb3JkLW52chsLEg5Eb3dubG9hZF9jbGFzcxiAgICA_pOICgw";
-var self = "/downloads/" + d_id;
-var bullet = {};
-bullet['NUMBER_OF_DOWNLOADS'] = 1;
-var payload = JSON.stringify(bullet);
-var req = new XMLHttpRequest();
-var url = ov + self;
-req.open( "PATCH", url, true );
-req.setRequestHeader("Content-Type", "application/json");
-req.addEventListener( "load",function(){
-if( req.status >= 200 && req.status < 403 ){var response = JSON.stringify(req.responseText);}
-else{console.log("Error: " + req.statusText);}});
-req.send(payload);
-var url = ov +"/download"
-window.open(url);
-}
-var down = document.getElementById('downloadoros');
-var dl_url = {};
-dl_url['TEST'] = "complete!";
-var oros = JSON.stringify(dl_url);
-var filename = 'oros_v1';
-down.addEventListener("click", function(e){var target = e.target || e.srcElement; downloadoros(oros, filename, 'plain')}, false);
-down.class = "downloadoros";
-down.innerHTML = "download oros v1.4";
-
-
 function execute_changelog(element)
 {
 var url = ov + "/changelog"
@@ -461,24 +408,6 @@ window.open(url);
 }
 var home_href = document.getElementById('changelog');
 home_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_changelog(target)}, false);
-
-function execute_faq(element)
-{
-var url = ov + "/faq"
-window.open(url);
-}
-var home_href = document.getElementById('faq');
-home_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_faq(target)}, false);
-
-/*
-function execute_setup_guide(element)
-{
-var url = ov + "/setup_guide";
-window.open(url);
-}
-var lamda_link = document.getElementById('setup_guide');
-lamda_link.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_setup_guide(target)}, false);
-*/
 
 
 function get_auth()
@@ -725,11 +654,6 @@ dev_flag = response['dev_flag'];
 });req.send(null);
 
 if(dev_flag == 0){
-group1_hashrate = 0;
-group2_hashrate = 0;
-group3_hashrate = 0;
-group4_hashrate = 0;
-group5_hashrate = 0;
 
 var i = 0;
 var user_id = uid;
@@ -824,13 +748,6 @@ console.log("received");
 }
 }
 
-if(not_hashing_flag == 0){
-if(group1 != "" || group1 != null){if(resp2.GROUP_NUMBER == 1){group1_hashrate += int_hashrate; target_group.innerHTML = group1_hashrate;}}
-if(group2 != "" || group2 != null){if(resp2.GROUP_NUMBER == 2){group2_hashrate += int_hashrate; target_group.innerHTML = group2_hashrate;}}
-if(group3 != "" || group3 != null){if(resp2.GROUP_NUMBER == 3){group3_hashrate += int_hashrate; target_group.innerHTML = group3_hashrate;}}
-if(group4 != "" || group4 != null){if(resp2.GROUP_NUMBER == 4){group4_hashrate += int_hashrate; target_group.innerHTML = group4_hashrate;}}
-if(group5 != "" || group5 != null){if(resp2.GROUP_NUMBER == 5){group5_hashrate += int_hashrate; target_group.innerHTML = group5_hashrate;}}
-}
 var resp = {};
 resp = resp2;
 
@@ -953,303 +870,6 @@ var timer = setTimeout(refresh, 2000);
 }
 
 
-// delete GROUP selection
-function delete_last_group(target,resp,form_data){
-if(dev_flag == 0){
-if(delete_group == 1){
-var element = target.value;
-target.innerHTML = "..";
-var group_number = parseInt(resp.GROUP_NUMBER);
-var group_var = {};
-if(group_number == 5){group_var['group5'] = "";}
-if(group_number == 4){group_var['group4'] = "";}
-if(group_number == 3){group_var['group3'] = "";}
-if(group_number == 2){group_var['group2'] = "";}
-if(group_number == 1){group_var['group1'] = "";}
-
-var resp2 = JSON.parse(form_data);
-
-var payload = JSON.stringify(group_var);
-var req = new XMLHttpRequest();
-var url = ov + "/user/" + uid;
-req.open( "PATCH", url, true );
-req.setRequestHeader('Authorization', auth);
-req.setRequestHeader("Content-Type", "application/json");
-req.addEventListener( "load",function(){
-if( req.status >= 200 && req.status < 403 ){var response = JSON.stringify(req.responseText);}
-else{console.log("Error: " + req.statusText);}});
-req.send(payload);
-
-
-function refresh(){
-getGroups(form_data);
-var outtext = "group deleted";
-log_event(outtext);
-}
-var timer = setTimeout(refresh, 4000);
-}
-}
-}
-
-
-// add groups section
-function addGroups(resp, cur, form_data){
-var divid = document.getElementById("GROUPS");
-var base = cur + 1;
-
-if(cur === 0){while (divid.firstChild ){divid.removeChild(divid.firstChild);}}
-if(base == 1){
-var grid_basis = document.createElement("gridBASIS");
-grid_basis.className = "grid-containerBASIS";
-if(basis == "" || basis == null){grid_basis.className = "grid-containerEMPTY_BASIS";}
-divid.appendChild(grid_basis);
-
-var grid_group = document.createElement("gridGROUP");
-grid_group.className = "grid-containerGROUP";
-divid.appendChild(grid_group);
-
-
-var plus_basis = document.createElement("codeBASIS");
-function execute_basis(element)
-{
-var url = add_basis_url + session;
-window.location.href = url;
-}
-plus_basis.className = "z";
-plus_basis.setAttribute("id", "plus_basis");
-plus_basis.innerHTML = "SETTINGS";
-if(basis == "" || basis == null){plus_basis.innerHTML = "SETTINGS: START HERE!";}
-plus_basis.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_basis(target)}, false);
-grid_basis.appendChild(plus_basis);
-
-var one = document.createElement("codevv");
-one.innerHTML = "<br>";
-grid_basis.appendChild(one);
-
-
-var plus_group = document.createElement("codeL");
-function execute_plus_group(element)
-{
-if(number_of_groups < 5){
-var url = add_group_url + session;
-window.location.href = url;}
-}
-plus_group.className = "z";
-plus_group.setAttribute("id", "plus_group");
-plus_group.innerHTML = "+Group";
-plus_group.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_plus_group(target)}, false);
-grid_group.appendChild(plus_group);
-
-
-var fs = document.createElement("codeCH");
-fs.innerHTML = "H/s";
-fs.className = "y";
-grid_group.appendChild(fs);
-
-var rn = document.createElement("codeCH");
-rn.innerHTML = "GN";
-rn.className = "x";
-grid_group.appendChild(rn);
-
-var cn = document.createElement("codeCH");
-cn.innerHTML = "CL";
-cn.className = "w";
-cn.id = "group_coin_selector";
-grid_group.appendChild(cn);
-
-
-var enable_gd = document.createElement("codeL");
-function execute_enable_group_delete(element)
-{
-var element2 = document.getElementById("delete_group");
-var vis = 0.5;
-if(element2 != ""){
-if(element2.style.opacity == 0.01){
-vis = 1.0;
-element2.style.opacity = vis;
-delete_group = 1;
-element.innerHTML = "lock";
-}
-else{
-vis = 0.01;
-element2.style.opacity = vis;
-delete_group = 0;
-element.innerHTML = "delete";
-}
-}
-}
-enable_gd.innerHTML = "delete";
-enable_gd.className = "v";
-enable_gd.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_enable_group_delete(target)}, false);
-grid_group.appendChild(enable_gd);
-}
-
-var resp = JSON.parse(resp);
-
-
-var mydivs = [];
-mydivs[base] = document.createElement("grid2");
-var curg2 = mydivs[base];
-curg2.className = "grid-containerGROUPS";
-divid.appendChild(curg2);
-
-
-var myedits = [];
-myedits[base] = document.createElement("codeL");
-var edits = myedits[base];
-function execute_edit_group(element)
-{
-var gn = base;
-var url = edit_group_url + session + gn;
-window.location.href = url;
-}
-edits.className = "z";
-edits.innerHTML = "Edit";
-edits.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_edit_group(target)}, false);
-curg2.appendChild(edits);
-
-
-var mych2 = [];
-if(base % 2 == 1){mych2[base] = document.createElement("code2");}
-if(base % 2 == 0){mych2[base] = document.createElement("code4");}
-var ch2 = mych2[base];
-ch2.value = resp.COIN;
-ch2.id = 'g' + resp.GROUP_NUMBER;
-ch2.innerHTML = "..";
-ch2.className = "y";
-curg2.appendChild(ch2);
-
-var mygn = [];
-if(base % 2 == 1){mygn[base] = document.createElement("code2");}
-if(base % 2 == 0){mygn[base] = document.createElement("code4");}
-var gn2 = mygn[base];
-gn2.innerHTML = base;
-gn2.className = "x";
-curg2.appendChild(gn2);
-
-var mycn2 = [];
-if(base % 2 == 1){mycn2[base] = document.createElement("code2");}
-if(base % 2 == 0){mycn2[base] = document.createElement("code4");}
-var cn2 = mycn2[base];
-cn2.id = 'g' + resp.GROUP_NUMBER + resp.COIN;
-
-// newmod
-cn2.innerHTML = resp.COIN;
-if(resp.COIN == "CLIENT"){
-cn2.innerHTML = resp.CLIENT;
-if(resp.CLIENT == "bci_progpowminer"){cn2.innerHTML = "bci_ppow";}
-if(resp.CLIENT == "bminer_15_5_1"){cn2.innerHTML = "bminer";}
-if(resp.CLIENT == "claymore_14_2"){cn2.innerHTML = "claymore";}
-if(resp.CLIENT == "claymore_12_0"){cn2.innerHTML = "claymore";}
-if(resp.CLIENT == "cryptodredge_0_19_1_c10"){cn2.innerHTML = "CD_19";}
-if(resp.CLIENT == "cryptodredge_0_18_0_c10"){cn2.innerHTML = "CD_18";}
-if(resp.CLIENT == "cryptodredge_v0_18_0_cuda_9_2"){cn2.innerHTML = "CD_18";}
-if(resp.CLIENT == "cryptodredge_v0_17_0_cuda_9_2"){cn2.innerHTML = "CD_17";}
-if(resp.CLIENT == "ethminer_0_17_1"){cn2.innerHTML = "ethminer";}
-if(resp.CLIENT == "gminer_1_42"){cn2.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_41"){cn2.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_40"){cn2.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_39"){cn2.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_38"){cn2.innerHTML = "gminer";}
-if(resp.CLIENT == "PhoenixMiner_4_2c"){cn2.innerHTML = "phoenix";}
-if(resp.CLIENT == "trex_0_14_4_c10"){cn2.innerHTML = "trex";}
-if(resp.CLIENT == "trex_0_10_2_c10"){cn2.innerHTML = "trex";}
-if(resp.CLIENT == "trex_0_9_2_c10"){cn2.innerHTML = "trex";}
-if(resp.CLIENT == "trex_0_9_2_c9"){cn2.innerHTML = "trex";}
-if(resp.CLIENT == "z_enemy_1_28"){cn2.innerHTML = "z_enemy";}
-if(resp.CLIENT == "z_enemy_2_0"){cn2.innerHTML = "z_enemy";}
-}
-
-cn2.className = "w";
-curg2.appendChild(cn2);
-
-
-if(base == number_of_groups){
-var mydelete = [];
-if(base % 2 == 1){mydelete[base] = document.createElement("codedelete");}
-if(base % 2 == 0){mydelete[base] = document.createElement("codedelete");}
-var updelete = mydelete[base];
-updelete.innerHTML = "delete";
-updelete.className = "v";
-updelete.style.opacity = 0.01;
-updelete.value = JSON.stringify(resp);
-updelete.id = "delete_group";
-updelete.addEventListener("click", function(e){var target = e.target || e.srcElement; delete_last_group(target,resp,form_data)}, false);
-curg2.appendChild(updelete);
-}
-}
-
-
-function addGroupZ(resp, cur, form_data){
-var divid = document.getElementById("GROUPS");
-var base = cur;
-
-if(cur === 0){while (divid.firstChild ){divid.removeChild(divid.firstChild);}}
-
-var grid_basis = document.createElement("gridBASIS");
-grid_basis.className = "grid-containerBASIS";
-if(basis == "" || basis == null){grid_basis.className = "grid-containerEMPTY_BASIS";}
-divid.appendChild(grid_basis);
-
-var grid_group = document.createElement("gridGROUP");
-grid_group.className = "grid-containerGROUP";
-divid.appendChild(grid_group);
-
-
-var plus_basis = document.createElement("codeL");
-function execute_basis(element)
-{
-var url = add_basis_url + session;
-window.location.href = url;
-}
-plus_basis.className = "z";
-plus_basis.setAttribute("id", "plus_basis");
-plus_basis.innerHTML = "BASIS";
-if(basis == "" || basis == null){plus_basis.innerHTML = "BASIS: START HERE!";}
-plus_basis.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_basis(target)}, false);
-grid_basis.appendChild(plus_basis);
-
-//var wall = document.createElement("div");
-//wall.id = "wallet_base";
-//wall.className = "z";
-//grid_basis.appendChild(wall);
-
-var one = document.createElement("codevv");
-one.innerHTML = "<br>";
-grid_basis.appendChild(one);
-
-
-var plus_group = document.createElement("codeL");
-function execute_plus_group(element)
-{
-if(number_of_groups < 5){
-var url = add_group_url + session;
-window.location.href = url;}
-}
-plus_group.className = "z";
-plus_group.setAttribute("id", "plus_group");
-plus_group.innerHTML = "+Group";
-plus_group.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_plus_group(target)}, false);
-grid_group.appendChild(plus_group);
-
-var fs = document.createElement("codeCH");
-fs.innerHTML = "H/s";
-fs.className = "y";
-grid_group.appendChild(fs);
-
-var rn = document.createElement("codeCH");
-rn.innerHTML = "GN";
-rn.className = "x";
-grid_group.appendChild(rn);
-
-var cn = document.createElement("codeCH");
-cn.innerHTML = "CL";
-cn.className = "w";
-cn.id = "group_coin_selector";
-grid_group.appendChild(cn);
-}
-
-
 function getUser(){
 var temp = {};
 var req = new XMLHttpRequest();
@@ -1259,147 +879,11 @@ req.setRequestHeader('Authorization', auth);
 req.addEventListener( "load",function(){
 if( req.status >= 200 && req.status < 403 ){
 var response = JSON.parse( req.responseText );
-basis = response['basis'];
-group1 = response['group1'];
-group2 = response['group2'];
-group3 = response['group3'];
-group4 = response['group4'];
-group5 = response['group5'];
-
 dev_flag = response['dev_flag'];
-if(group5 != ""  || group5 != null){number_of_groups = 5;}
-if(group5 == "" || group5 == null){number_of_groups = 4;}
-if(group4 == "" || group4 == null){number_of_groups = 3;}
-if(group3 == "" || group3 == null){number_of_groups = 2;}
-if(group2 == "" || group2 == null){number_of_groups = 1;}
-if(group1 == "" || group1 == null){number_of_groups = 0;}
 }
 else{console.log( "Error: " + req.statusText );}});
 req.send(null);
 }
-
-
-function getGroups(form_data){
-getUser();
-var i = 0;
-var resp = {};
-var z = number_of_groups;
-
-if(number_of_groups === 0){addGroupZ(basis,0,form_data);}
-if(number_of_groups > 0){
-for(i = 0; i < z; i++){
-
-if(i == 0){resp = group1;}
-if(i == 1){resp = group2;}
-if(i == 2){resp = group3;}
-if(i == 3){resp = group4;}
-if(i == 4){resp = group5;}
-
-addGroups(resp,i,form_data);
-}
-}
-}
-
-
-// implements group changes
-// assumes that group oc settings are always pushed to individual rigs if part of a group
-function group_changes_to_rigs(resp,i,form_data,numrigs){
-group_rig = {};
-group_rig_flag = 0;
-var group_oc_flag = 0;
-var group_var = {};
-var coin_flag = 0;
-if(dev_flag == 0)
-{
-if(resp.GROUP_NUMBER == 1 || resp.GROUP_NUMBER == 2 || resp.GROUP_NUMBER == 3 || resp.GROUP_NUMBER == 4 || resp.GROUP_NUMBER == 5)
-{
-if(group1 != "" || group1 != null){if(resp.GROUP_NUMBER == 1){group_var = JSON.parse(group1);}}
-if(group2 != "" || group2 != null){if(resp.GROUP_NUMBER == 2){group_var = JSON.parse(group2);}}
-if(group3 != "" || group3 != null){if(resp.GROUP_NUMBER == 3){group_var = JSON.parse(group3);}}
-if(group4 != "" || group4 != null){if(resp.GROUP_NUMBER == 4){group_var = JSON.parse(group4);}}
-if(group5 != "" || group5 != null){if(resp.GROUP_NUMBER == 5){group_var = JSON.parse(group5);}}
-if(resp.USE_GROUP_OC != group_var.USE_GROUP_OC){group_rig['USE_GROUP_OC'] = group_var.USE_GROUP_OC; group_rig_flag = 1;}
-// chere is this making every reload a change?
-if(group_var.USE_GROUP_OC == "YES"){group_oc_flag = 1;}
-if(resp.RVN_ADDRESS != group_var.RVN_ADDRESS){group_rig['RVN_ADDRESS'] = group_var.RVN_ADDRESS; group_rig_flag = 1;}
-if(resp.CLIENT != group_var.CLIENT){group_rig['CLIENT'] = group_var.CLIENT; group_rig_flag = 1;}
-if(resp.CLIENT_ARGS != group_var.CLIENT_ARGS){group_rig['CLIENT_ARGS'] = group_var.CLIENT_ARGS; group_rig_flag = 1;}
-if(resp.COIN != group_var.COIN){group_rig['COIN'] = group_var.COIN; group_rig_flag = 1; coin_flag = 1;}
-if(resp.CHATID != group_var.CHATID){group_rig['CHATID'] = group_var.CHATID; group_rig_flag = 1;}
-if(resp.APIKEY != group_var.APIKEY){group_rig['APIKEY'] = group_var.APIKEY; group_rig_flag = 1;}
-if(resp.RVN_POOL != group_var.RVN_POOL){group_rig['RVN_POOL'] = group_var.RVN_POOL; group_rig_flag = 1;}
-if(resp.NANOPOOL_EMAIL != group_var.NANOPOOL_EMAIL){group_rig['NANOPOOL_EMAIL'] = group_var.NANOPOOL_EMAIL; group_rig_flag = 1;}
-if(resp.EMAIL_UPDATES != group_var.EMAIL_UPDATES){group_rig['EMAIL_UPDATES'] = group_var.EMAIL_UPDATES; group_rig_flag = 1;}
-if(group_oc_flag == 1){
-if(resp.X16R_SPECIFIC_OC_SETTINGS != group_var.X16R_SPECIFIC_OC_SETTINGS){group_rig['X16R_SPECIFIC_OC_SETTINGS'] = group_var.X16R_SPECIFIC_OC_SETTINGS; group_rig_flag = 1;}
-if(resp.CLIENT_OC != group_var.CLIENT_OC){group_rig['CLIENT_OC'] = group_var.CLIENT_OC; group_rig_flag = 1;}
-}
-
-if(group_rig_flag == 1){
-
-group_rig['COIN'] = group_var.COIN;
-var outtext = "patching changes " + resp.RIG_NUMBER + " " + group_var.COIN;
-log_event(outtext);
-
-var self = resp.self;
-var payload = JSON.stringify(group_rig);
-
-var req = new XMLHttpRequest();
-var url = ov + self;
-req.open( "PATCH", url, true );
-req.setRequestHeader('Authorization', auth);
-req.setRequestHeader("Content-Type", "application/json");
-req.addEventListener( "load",function(){
-if( req.status >= 200 && req.status < 403 ){var response = JSON.stringify(req.responseText);}
-else{console.log("Error: " + req.statusText);}});
-req.send(payload);
-
-// update dashboard
-var element_id = resp.RIG_NUMBER + 'coin';
-var push = document.getElementById(element_id);
-
-push.innerHTML = group_rig.COIN;
-// newmod
-if(group_rig.COIN == "CLIENT"){
-push.innerHTML = resp.CLIENT;
-if(resp.CLIENT == "bci_progpowminer"){push.innerHTML = "bci_ppow";}
-if(resp.CLIENT == "bminer_15_5_1"){push.innerHTML = "bminer";}
-if(resp.CLIENT == "claymore_14_2"){push.innerHTML = "claymore";}
-if(resp.CLIENT == "claymore_12_0"){push.innerHTML = "claymore";}
-if(resp.CLIENT == "cryptodredge_0_19_1_c10"){push.innerHTML = "CD_19";}
-if(resp.CLIENT == "cryptodredge_0_18_0_c10"){push.innerHTML = "CD_18";}
-if(resp.CLIENT == "cryptodredge_v0_18_0_cuda_9_2"){push.innerHTML = "CD_18";}
-if(resp.CLIENT == "cryptodredge_v0_17_0_cuda_9_2"){push.innerHTML = "CD_17";}
-if(resp.CLIENT == "ethminer_0_17_1"){push.innerHTML = "ethminer";}
-if(resp.CLIENT == "gminer_1_42"){push.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_41"){push.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_40"){push.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_39"){push.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_38"){push.innerHTML = "gminer";}
-if(resp.CLIENT == "PhoenixMiner_4_2c"){push.innerHTML = "phoenix";}
-if(resp.CLIENT == "trex_0_14_4_c10"){push.innerHTML = "trex";}
-if(resp.CLIENT == "trex_0_10_2_c10"){push.innerHTML = "trex";}
-if(resp.CLIENT == "trex_0_9_2_c10"){push.innerHTML = "trex";}
-if(resp.CLIENT == "trex_0_9_2_c9"){push.innerHTML = "trex";}
-if(resp.CLIENT == "z_enemy_1_28"){push.innerHTML = "z_enemy";}
-if(resp.CLIENT == "z_enemy_2_0"){push.innerHTML = "z_enemy";}
-}
-
-var element2_id = resp.RIG_NUMBER;
-var push2 = document.getElementById(element2_id);
-push2.innerHTML = resp.HASHRATE;
-if(resp.HASHRATE == NaN){push2.innerHTML = "0"}
-if(coin_flag == 1){push2.innerHTML = "0"}
-
-var currig = resp.RIG_NUMBER + 'oc';
-var push2 = document.getElementById(currig);
-if(group_rig.COIN == "RVN"){push2.innerHTML = resp.X16R_SPECIFIC_OC_SETTINGS}
-if(group_rig.COIN == "CLIENT"){push2.innerHTML = resp.CLIENT_OC}
-}
-}
-}
-} // function group_changes_to_rigs(resp,i,form_data,numrigs){
-
 
 // expand or contract pool lamda links
 function content_hide_show_toggle(element2){
@@ -1459,20 +943,6 @@ plus.addEventListener("click", function(e){var target = e.target || e.srcElement
 curg.appendChild(plus);
 
 
-var basis_json = {};
-if(basis != ""){basis_json = JSON.parse(basis);}
-
-var rvn = document.createElement("codeRVN");  //codeRVN
-function execute_minermoreRVN(element)
-{
-var url = "https://rvn.nanopool.org/account/" + basis_json['RVN_ADDRESS'];
-window.open(url);
-}
-rvn.style.display = "none";
-rvn.innerHTML = basis_json['RVN_ADDRESS'];
-rvn.id = "rvn_ref_link";
-rvn.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_minermoreRVN(target)}, false);
-wallet.appendChild(rvn);
 
 var fs = document.createElement("codeCH");
 fs.innerHTML = "H/s";
@@ -1551,16 +1021,7 @@ divid.appendChild(curg2);
 var myedits = [];
 myedits[base] = document.createElement("codeL");
 var edits = myedits[base];
-function execute_edit_rig(element)
-{
-var toString = cur;
-var url = edit_rig_url + session + "_" + toString;
-window.location.href = url;
-}
-edits.className = "a";
-edits.innerHTML = "Edit";
-edits.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_edit_rig(target)}, false);
-curg2.appendChild(edits);
+
 
 
 var mych2 = [];
@@ -1590,27 +1051,6 @@ cn2.innerHTML = resp.COIN;
 // newmod
 if(resp.COIN == "CLIENT"){
 cn2.innerHTML = resp.CLIENT;
-if(resp.CLIENT == "bci_progpowminer"){cn2.innerHTML = "bci_ppow";}
-if(resp.CLIENT == "bminer_15_5_1"){cn2.innerHTML = "bminer";}
-if(resp.CLIENT == "claymore_14_2"){cn2.innerHTML = "claymore";}
-if(resp.CLIENT == "claymore_12_0"){cn2.innerHTML = "claymore";}
-if(resp.CLIENT == "cryptodredge_0_19_1_c10"){cn2.innerHTML = "CD_19";}
-if(resp.CLIENT == "cryptodredge_0_18_0_c10"){cn2.innerHTML = "CD_18";}
-if(resp.CLIENT == "cryptodredge_v0_18_0_cuda_9_2"){cn2.innerHTML = "CD_18";}
-if(resp.CLIENT == "cryptodredge_v0_17_0_cuda_9_2"){cn2.innerHTML = "CD_17";}
-if(resp.CLIENT == "ethminer_0_17_1"){cn2.innerHTML = "ethminer";}
-if(resp.CLIENT == "gminer_1_42"){cn2.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_41"){cn2.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_40"){cn2.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_39"){cn2.innerHTML = "gminer";}
-if(resp.CLIENT == "gminer_1_38"){cn2.innerHTML = "gminer";}
-if(resp.CLIENT == "PhoenixMiner_4_2c"){cn2.innerHTML = "phoenix";}
-if(resp.CLIENT == "trex_0_14_4_c10"){cn2.innerHTML = "trex";}
-if(resp.CLIENT == "trex_0_10_2_c10"){cn2.innerHTML = "trex";}
-if(resp.CLIENT == "trex_0_9_2_c10"){cn2.innerHTML = "trex";}
-if(resp.CLIENT == "trex_0_9_2_c9"){cn2.innerHTML = "trex";}
-if(resp.CLIENT == "z_enemy_1_28"){cn2.innerHTML = "z_enemy";}
-if(resp.CLIENT == "z_enemy_2_0"){cn2.innerHTML = "z_enemy";}
 }
 
 
@@ -1724,21 +1164,6 @@ plus.addEventListener("click", function(e){var target = e.target || e.srcElement
 curg.appendChild(plus);
 
 
-var basis_json = {};
-if(basis != ""){basis_json = JSON.parse(basis);}
-
-var rvn = document.createElement("codeRVN");  //codeRVN
-function execute_minermoreRVN(element)
-{
-var url = "https://rvn.nanopool.org/account/" + basis_json['RVN_ADDRESS'];
-window.open(url);
-}
-rvn.style.display = "none";
-rvn.innerHTML = basis_json['RVN_ADDRESS'];
-rvn.id = "rvn_ref_link";
-rvn.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_minermoreRVN(target)}, false);
-wallet.appendChild(rvn);
-
 var fs = document.createElement("codeCH");
 fs.innerHTML = "H/s";
 fs.className = "b";
@@ -1803,7 +1228,6 @@ if( req2.status >= 200 && req2.status < 403 ){
 var resp2 = JSON.parse(req2.responseText);
 addDiv(resp2,i,form_data,numrigs);
 
-group_changes_to_rigs(resp2,i,form_data,numrigs);
 }else{console.log( "Error: " + req2.statusText );}});req2.send( null );}
 }else{console.log( "Error: " + req.statusText );}});req.send( null );
 } // function getRigs(form_data){
