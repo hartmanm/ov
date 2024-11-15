@@ -1,0 +1,148 @@
+<!--
+# Copyright (c) 2018 Michael Neill Hartman. All rights reserved.
+# mnh_license@proton.me
+# https://github.com/hartmanm
+# ov (previously openrig.net)
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ov api</title>
+<meta charset="utf-8">
+<meta name="Description" content="mining os">
+<meta name="theme-color" content="#012060"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.header{padding-top:30px; text-align:center; color:white; background-color:#746793;}
+.footer{width:100%; position:fixed; bottom:0px; height: 1vw; color:#ffffff; background-color:#677793;}
+
+.navbar {display: flex; background-color: #333; padding: 0px;}
+.navbar a {color: white; padding: 14px 20px; text-decoration: none; text-align: center;}
+.navbar a:hover {background-color: #ddd; color: black;}
+lamda_link{}
+lamda_link:hover,lamda_link:active,lamda_link:focus{padding-top: 15px; padding-bottom: 17px; cursor:pointer;}
+
+.l{max-width:300px; margin-left: auto; margin-right: auto;}
+
+.grid-container{
+display: grid;
+justify-items: center;
+grid-gap: 10px;
+grid-template-areas:
+"u2"
+"v"
+"t"
+"q"
+"l"
+"ll";}
+.u2 {grid-area: u2;}
+signup:hover,signup:active,signup:focus {color: #CFD0D1; background-color: #12192A; cursor:pointer; outline: 0; text-decoration: none}
+login:hover,login:active,login:focus {color: #CFD0D1; background-color: #12192A; cursor:pointer; outline: 0; text-decoration: none}
+.v {grid-area: v;}
+.t {grid-area: t;}
+.q {grid-area: q;}
+.l {grid-area: l;}
+.ll {grid-area: ll;}
+
+.grid-container1{
+display: grid;
+justify-items: center;
+grid-gap: 10px;
+grid-template-areas:
+"w"
+"a"
+"i2"
+"x"
+"s"
+"d"
+"z"
+"g"
+"n";}
+.w {grid-area: w;}
+.a {grid-area: a;}
+.i2 {grid-area: i2;}
+.x {grid-area: x;}
+.s {grid-area: s;}
+.d {grid-area: d;}
+.z {grid-area: z;}
+.g {grid-area: g;}
+.n {grid-area: n;}
+
+body{background:white;}
+}
+code2{padding: 2px 2px; font-family: arial, sans-serif; color: #0F5900; background-color: #CFF8CF; border-radius: 2px;}
+code{padding: 2px 2px; font-family: arial, sans-serif; border-radius: 2px;}
+thousand_series2{padding: 2px 2px; font-family: arial, sans-serif; color: #0F640F; background-color: #DAF0DA; border-radius: 2px;}
+thousand_series{font-family: arial, sans-serif; color: #0F640F; border-radius: 2px;}
+signup{padding: 2px 2px; font-family: arial, sans-serif; color: #833F00; background-color: #FFD4B2; border-radius: 2px;}
+login{padding: 2px 2px; font-family: arial, sans-serif; color: #032166; background-color: #CBD3EE; border-radius: 2px;}
+ddiv{}
+@media screen and (min-width: 1125px){ddiv{transform: scale(1.25); transition: transform 4s;} .l{max-width:450px; margin-left: auto; margin-right: auto;} .header{padding-top: 100px; text-align:center; color:white;}.footer{width:100%; position:fixed; bottom:-5vw; height: 3.75vw; color:#ffffff; background-color:#677793;}}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>ov api</h1>
+<p>easy-to-use centralized configuration and management system</p>
+</div>
+<ddiv>
+<div class="grid-container" id="main">
+<div class="u2"><signup id="signup">Signup</signup>&nbsp&nbsp<login id="login">Login</login></div>
+<div class="v"></div>
+<div class="t">oros mining OS supports mining:</div>
+<div class="l"><div id="base"></div></div>
+<div class="ll" id="linkinfo"></div>
+</div>
+<div class="grid-container1" id="main2">
+<div class="w"></div>
+<div class="a"></div>
+<div class="i2">with:</div>
+<div class="x"><thousand_series>Nvidia GPUs</thousand_series></div>
+<div class="d">fee:</div>
+<div class="z">0.05%</div>
+<div class="g">0.05% is 432 seconds of each day</div>
+<div class="n">Configure, edit, and monitor rigs.</div>
+</div>
+</ddiv>
+<footer class="footer"></footer>
+<script src="https://hartmanm.github.io/ov/config.js"></script>
+<script>
+const ov = 'https://hartmanm.github.io/ov';
+var base = document.getElementById("base");
+
+function lamda_link(innerhtml,id,url)
+{
+var ddiv = document.createElement("lamda_link");
+ddiv.innerHTML = innerhtml;
+ddiv.id = id;
+base.appendChild(ddiv);
+function execute_z(element,url){window.open(url);}
+var lamdalink = document.getElementById(id);
+lamdalink.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_z(target,url)}, false);
+}
+
+lamda_link('<img src="'+eth_img+'" style="width:50px;height:50px;" />','eth','https://www.ethereum.org');
+lamda_link('<img src="'+etc_img+'" style="width:50px;height:50px;" />','rvn','https://ravencoin.org');
+lamda_link('<img src="'+rvn_img+'" style="width:50px;height:50px;" />','etc','https://ethereumclassic.org');
+lamda_link('<img src="'+xmr_img+'" style="width:50px;height:50px;" />','xmr','https://www.getmonero.org');
+
+function execute_signup(element)
+{
+var url = ov + "/signup.html";
+window.location.href = url;
+}
+
+var signup_href = document.getElementById('signup');
+signup_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_signup(target)}, false);
+
+function execute_login(element)
+{
+var url = ov + "/login.html";
+window.location.href = url;
+}
+var signup_href = document.getElementById('login');
+signup_href.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_login(target)}, false);
+
+</script>
+</body>
+</html>
