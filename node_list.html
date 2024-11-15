@@ -406,10 +406,6 @@ log = 0;
 var push = document.getElementById("log_ex_cl");
 push.addEventListener("click", function(e){var target = e.target || e.srcElement; log_eorc(target)}, false);
 
-//setup wallet expand button
-var wallet_ex_cl = document.getElementById("wallet_ex_cl");
-wallet_ex_cl.addEventListener("click", function(e){var target = e.target || e.srcElement; content_hide_show_toggle(target)}, false);
-
 function log_event(new_log_event){
 var push = document.getElementById("log");
 var space = document.createElement("div");
