@@ -1,0 +1,285 @@
+<!--
+# Copyright (c) 2018 Michael Neill Hartman. All rights reserved.
+# mnh_license@proton.me
+# https://github.com/hartmanm
+# ov (previously openrig.net)
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>&nbsp add new node</title>
+</head>
+<body>
+<style>
+body{background:white; -webkit-app-region: drag;}
+code{padding: 4px 4px;font-size: 115%;color: #032166;background-color: #CBD3EE;border-radius: 2px;}
+h1,h2{color: #2a2f2c;font-family: Lato, sans-serif;font-weight: 340;line-height: 1.125;}
+.content_heading{margin-left: 20px; margin-top: 40px;font-size: 125%;}
+.dropdown{display: block; margin-top: 4px; padding: 8px 12px; padding: 8px 12px; padding: 0.5rem 0.75rem; border: 1px solid #cdcfcf; width: 55%; font-family: 'Open Sans', sans-serif; font-size: 16px; font-size: 16px; font-size: 1rem;}
+.dropdown:focus,.dropdown:active {border-color: #686a69; outline: 0;}
+.form{position: relative; display: block; margin: 4px; padding: 0px 80px 20px 10px;}
+.form_input_group{margin-top: 4px; margin-top: 4px; margin-top: 0.25rem; padding: 8px 16px; padding: 8px 16px; padding: 0.5rem 1rem;}
+.form_label{display: block; color: #414643; font-family: Lato, sans-serif; font-size: 75%; line-height: 1.125;}
+.form_input{display: block; margin-top: 4px; padding: 8px 12px; padding: 8px 12px; padding: 0.5rem 0.75rem; border: 1px solid #cdcfcf; width: 100%; font-family: 'Open Sans', sans-serif; font-size: 16px; font-size: 16px; font-size: 1rem;}
+.form_button{margin-bottom: 40px; margin-top: 40px; margin-left: 25px; padding: 1px 1px; font-size: 115%; color: #12192A; background-color: #CFD0D1; border-radius: 2px;}
+.form_button:hover,.form_button:active,.form_button:focus{color: #CFD0D1; background-color: #12192A; cursor: pointer; outline: 0;}
+.lamdalink{margin-bottom: 25px; margin-top: 40px;}
+.lamdalink:hover,.lamdalink:active,.lamdalink:focus{color: #CFD0D1; background-color: #12192A; cursor: pointer; outline: 0; text-decoration: none;}
+.section{margin-left: auto; margin-right: auto; width: 100%;}
+.content{max-width: 680px; margin-left: auto; margin-right: auto;}
+.form_input_client_args{word-wrap: break-word; word-break: break-all; height: 95px; width: 100%; margin-top: 4px; padding: 8px 12px; padding: 8px 12px; padding: 0.5rem 0.75rem; border: 1px solid #cdcfcf; font-family: 'Open Sans', sans-serif; font-size: 16px; font-size: 16px; font-size: 1rem;}
+</style>
+<section class="section">
+<section class="content">
+<h1 class="content_heading">add new node</h1>
+<form autocomplete="off" class="form">
+<div id=USER_ID></div>
+<div id=USE_GROUP_OC></div>
+<div id="CHATID"></div>
+<div id="APIKEY"></div>
+<div id=EMAIL_UPDATES></div>
+<div class="form_input_group">
+<label class="form_label" for="NODE_NUMBER">NODE_NUMBER</label>
+<input class="form_input form_input--NODE_NUMBER" id="NODE_NUMBER" value="" readonly name="NODE_NUMBER" type="text"/>
+</div>
+<div hidden class="form_input_group">
+<label hidden class="form_label" for="COIN">COIN ( CLIENT )</label>
+<select hidden class="dropdown" id="COIN" value="" name="COIN" type="text"/>
+<option>CLIENT</option>
+</select>
+</div>
+<div class="form_input_group">
+<label class="form_label" for="GROUP_NUMBER">GROUP_NUMBER (1, 2, 3, 4, or 5)  example: 1</label>
+<select class="dropdown" id="GROUP_NUMBER" value="" name="GROUP_NUMBER" type="text"/>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+</div>
+<div class="form_input_group">
+<label class="form_label" for="CLIENT">CLIENT ( select a client )</label>
+<select class="dropdown" id="CLIENT" value="" name="CLIENT" type="text"/>
+<option>option1</option>
+<option>option2</option>
+</select>
+</div>
+<div class="form_input_group">
+<label class="form_label" for="CLIENT_ARGS">CLIENT_ARGS (arguments for client, use $NODE for workername)  example: </label>
+<textarea class="form_input_client_args" id="CLIENT_ARGS" value="" name="CLIENT_ARGS" type="text"></textarea>
+</div>
+<div class="form_input_group">
+<label class="form_label" for="CLIENT_OC">CLIENT_OC (PL,CC,MC,FS,EH) example: 106,100,500,49,1</label>
+<input class="form_input form_input--CLIENT_OC" id="CLIENT_OC" value="" name="CLIENT_OC" type="text"/>
+</div>
+<button class="form_button" type="submit">Submit</button> &nbsp&nbsp&nbsp&nbsp <code id="feedback"></code>
+</form>
+<br>
+&nbsp&nbsp&nbsp&nbsp <code class="lamdalink" id="return"></code>
+</section>
+</section>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<script>
+'use strict';
+const ov = 'https://hartmanm.github.io/ov';
+const riglist_url = 'https://hartmanm.github.io/ov/riglist.html/';
+
+var session = "";
+var auth = "";
+var newGpu_id = "";
+var basis = {};
+var group1 = {};
+var group2 = {};
+var group3 = {};
+var group4 = {};
+var group5 = {};
+fillForm();
+
+var form_to_json = function form_to_json(elements){
+return [].reduce.call(elements, function (data, element){data[element.name] = element.value; return data;}, {});
+};
+var submit_form = function submit_form(event){
+event.preventDefault();
+var data = form_to_json(form.elements);
+data['USER_ID'] = document.getElementById('USER_ID').value;
+data['USE_GROUP_OC'] = document.getElementById('USE_GROUP_OC').value;
+data['CHATID'] = "setup_your_telegram_to_use";
+data['APIKEY'] = "setup_your_telegram_to_use";
+data['EMAIL_UPDATES'] = "YES";
+
+var data_box = JSON.stringify(data);
+addRig(data_box);
+assignRIGtoUser();
+};
+var form = document.getElementsByClassName('form')[0];
+form.addEventListener('submit', submit_form);
+
+function get_auth()
+{
+var uid = "";
+var newURL = window.location.toString();
+var here = newURL.indexOf("S");
+var resp = newURL.slice(here);
+var here2 = newURL.indexOf("_");
+var rn = newURL.slice(here2);
+var rnlength = rn.length;  // note is with _
+var temp = resp.slice(0,-rnlength);
+session = temp;
+var url = ov + "/sid_auth/" + session;
+var req = new XMLHttpRequest();
+req.open("GET", url, false);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = req.responseText;
+var i = 0
+while (i < 200)
+{response = response.replace('"', ''); i++;}
+auth = response;
+}else{console.log( "Error: " + req.statusText );}
+});
+req.send( null );
+}
+
+function get_uid_rid()
+{
+var uid = "";
+var newURL = window.location.toString();
+var here = newURL.indexOf("S");
+var resp = newURL.slice(here);
+var here2 = newURL.indexOf("_");
+var rn = newURL.slice(here2);
+var rnlength = rn.length;  // note is with _
+rn = rn.slice(1);
+var rna = document.getElementById('NODE_NUMBER').value = rn;
+var temp = resp.slice(0,-rnlength);
+session = temp;
+var url = ov + "/sid_uid/" + session;
+var req = new XMLHttpRequest();
+req.open("GET", url, false);
+req.setRequestHeader('Authorization', auth);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = req.responseText;
+var i = 0
+while (i < 200)
+{response = response.replace('"', ''); i++;}
+uid = response;
+var u_self = document.getElementById('USER_ID').value = uid;
+}else{console.log( "Error: " + req.statusText );}
+});
+req.send( null );
+}
+
+function getUser(ex_uid){
+var temp = {};
+var req = new XMLHttpRequest();
+var url = ov + "/user/" + ex_uid;
+req.open( "GET", url, false );
+req.setRequestHeader('Authorization', auth);
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = JSON.parse( req.responseText );
+basis = response['basis'];
+}
+else{console.log( "Error: " + req.statusText );}});
+req.send( null );
+}
+
+function fillForm()
+{
+get_auth();
+get_uid_rid();
+var u_self = document.getElementById('USER_ID').value;
+getUser(u_self);
+if(basis == ""){
+basis = {};
+var client_oc = document.getElementById('CLIENT_OC').value = "106,100,500,49,1";
+var gn = document.getElementById('GROUP_NUMBER').value = "1";
+var coin = document.getElementById('COIN').value = "CLIENT";
+var client = document.getElementById('CLIENT').value = "trex_cuda10";
+var group_oc = document.getElementById('USE_GROUP_OC').value = "NO";
+var emailswitch = document.getElementById('EMAIL_UPDATES').value = "YES";
+var clientargs = document.getElementById('CLIENT_ARGS').value = "";
+}
+else{
+basis = JSON.parse(basis);
+var gn = document.getElementById('GROUP_NUMBER').value = "1";
+var coin = document.getElementById('COIN').value = "CLIENT";
+var client = document.getElementById('CLIENT').value = basis.CLIENT;
+var group_oc = document.getElementById('USE_GROUP_OC').value = "NO";
+var emailswitch = document.getElementById('EMAIL_UPDATES').value = basis.EMAIL_UPDATES;
+var clientargs = document.getElementById('CLIENT_ARGS').value = basis.CLIENT_ARGS;
+var client_oc = document.getElementById('CLIENT_OC').value = basis.CLIENT_OC;
+}
+}
+
+function addRig(form_data){
+
+var payload = form_data;
+var req = new XMLHttpRequest();
+var temp = {};
+var url = ov + "/rigs";
+req.open( "POST", url, false );
+req.setRequestHeader('Authorization', auth);
+req.setRequestHeader("Content-Type", "text/html; charset=UTF-8");
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){
+var response = JSON.parse( req.responseText );
+temp['id'] = response['id'];
+newGpu_id = temp['id'];
+}
+else{console.log( "Error: " + req.statusText );}});
+req.send(payload);
+}
+
+
+function assignRIGtoUser()
+{
+var user = document.getElementById('USER_ID').value;
+var newGpu_id_in_assign = newGpu_id;
+var self = "/rigs/" + newGpu_id_in_assign;
+var basis = document.getElementById('feedback');
+var url = ov + "/user/" + user + self;
+var mimeType = "text/plain";
+var req = new XMLHttpRequest();
+req.open( "PUT", url, true );
+req.setRequestHeader('Authorization', auth);
+req.setRequestHeader("Content-Type", "text/html; charset=utf-8");
+req.addEventListener( "load",function(){
+if( req.status >= 200 && req.status < 403 ){var response = req.responseText;
+basis.innerHTML = "rig added";
+}
+else{console.log( "Error: " + req.statusText );
+basis.innerHTML = "submission failed, resubmit";
+}
+});
+req.send(null);
+}
+
+function execute_return(element)
+{
+setTimeout(function(){
+var url = riglist_url + session;
+window.location.href = url;
+}, 100);
+}
+var tos = document.getElementById('return');
+tos.innerHTML = "return to Rigs";
+tos.addEventListener("click", function(e){var target = e.target || e.srcElement; execute_return(target)}, false);
+</script>
+</body>
+</html>
