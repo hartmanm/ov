@@ -51,16 +51,6 @@ h1,h2{color: #2a2f2c;font-family: Lato, sans-serif;font-weight: 340;line-height:
 </select>
 </div>
 <div class="form_input_group">
-<label class="form_label" for="GROUP_NUMBER">GROUP_NUMBER (1, 2, 3, 4, or 5)  example: 1</label>
-<select class="dropdown" id="GROUP_NUMBER" value="" name="GROUP_NUMBER" type="text"/>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-</select>
-</div>
-<div class="form_input_group">
 <label class="form_label" for="CLIENT">CLIENT ( select a client )</label>
 <select class="dropdown" id="CLIENT" value="" name="CLIENT" type="text"/>
 <option>option1</option>
@@ -69,7 +59,7 @@ h1,h2{color: #2a2f2c;font-family: Lato, sans-serif;font-weight: 340;line-height:
 </div>
 <div class="form_input_group">
 <label class="form_label" for="CLIENT_ARGS">CLIENT_ARGS (arguments for client, use $NODE for workername)  example: </label>
-<textarea class="form_input_client_args" id="CLIENT_ARGS" value="" name="CLIENT_ARGS" type="text"></textarea>
+<textarea class="form_input_client_args" id="CLIENT_ARGS" value="" name="CLIENT_ARGS" type="text" style="width: 800px; height: 1000px;"></textarea>
 </div>
 <div class="form_input_group">
 <label class="form_label" for="CLIENT_OC">CLIENT_OC (PL,CC,MC,FS,EH) example: 106,100,500,49,1</label>
@@ -86,13 +76,6 @@ h1,h2{color: #2a2f2c;font-family: Lato, sans-serif;font-weight: 340;line-height:
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <script>
 'use strict';
 const ov = 'https://hartmanm.github.io/ov';
@@ -101,12 +84,6 @@ const riglist_url = 'https://hartmanm.github.io/ov/riglist.html/';
 var session = "";
 var auth = "";
 var newGpu_id = "";
-var basis = {};
-var group1 = {};
-var group2 = {};
-var group3 = {};
-var group4 = {};
-var group5 = {};
 fillForm();
 
 var form_to_json = function form_to_json(elements){
@@ -116,7 +93,6 @@ var submit_form = function submit_form(event){
 event.preventDefault();
 var data = form_to_json(form.elements);
 data['USER_ID'] = document.getElementById('USER_ID').value;
-data['USE_GROUP_OC'] = document.getElementById('USE_GROUP_OC').value;
 data['CHATID'] = "setup_your_telegram_to_use";
 data['APIKEY'] = "setup_your_telegram_to_use";
 data['EMAIL_UPDATES'] = "YES";
@@ -215,16 +191,6 @@ var group_oc = document.getElementById('USE_GROUP_OC').value = "NO";
 var emailswitch = document.getElementById('EMAIL_UPDATES').value = "YES";
 var clientargs = document.getElementById('CLIENT_ARGS').value = "";
 }
-else{
-basis = JSON.parse(basis);
-var gn = document.getElementById('GROUP_NUMBER').value = "1";
-var coin = document.getElementById('COIN').value = "CLIENT";
-var client = document.getElementById('CLIENT').value = basis.CLIENT;
-var group_oc = document.getElementById('USE_GROUP_OC').value = "NO";
-var emailswitch = document.getElementById('EMAIL_UPDATES').value = basis.EMAIL_UPDATES;
-var clientargs = document.getElementById('CLIENT_ARGS').value = basis.CLIENT_ARGS;
-var client_oc = document.getElementById('CLIENT_OC').value = basis.CLIENT_OC;
-}
 }
 
 function addRig(form_data){
@@ -245,7 +211,6 @@ newGpu_id = temp['id'];
 else{console.log( "Error: " + req.statusText );}});
 req.send(payload);
 }
-
 
 function assignRIGtoUser()
 {
